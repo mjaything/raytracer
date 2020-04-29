@@ -34,35 +34,33 @@ t_vector    subtract_vector(t_vector v1, t_vector v2)
     return (v);
 }
 
-t_vector    negate_vector(t_vector v1)
+t_vector    negate_vector(t_vector v)
 {
-    t_vector v;
-
-    v.x = -v1.x;
-    v.y = -v1.y;
-    v.z = -v1.z;
+    v.x = -v.x;
+    v.y = -v.y;
+    v.z = -v.z;
 
     return (v);
 }
 
-t_vector    multiply_vector_by_scalar(t_vector v1, double c)
+t_vector    multiply_vector_by_scalar(t_vector v, double c)
 {
     t_vector v;
 
-    v.x = c * v1.x;
-    v.y = c * v1.y;
-    v.z = c * v1.z;
+    v.x = c * v.x;
+    v.y = c * v.y;
+    v.z = c * v.z;
 
     return (v);
 }
 
-t_vector    divide_vector_by_scalar(t_vector v1, double c)
+t_vector    divide_vector_by_scalar(t_vector v, double c)
 {
     t_vector v;
 
-    v.x = v1.x / c;
-    v.y = v1.y / c;
-    v.z = v1.z / c;
+    v.x = v.x / c;
+    v.y = v.y / c;
+    v.z = v.z / c;
 
     return (v);
 }
