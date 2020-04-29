@@ -33,3 +33,14 @@ t_vector    subtract_vector(t_vector v1, t_vector v2)
 
     return (v);
 }
+
+t_vector    negate_vector(t_vector v1)
+{
+    t_vector v;
+
+    v.x = -v1.x;
+    v.y = -v1.y;
+    v.z = -v1.z;
+
+    return (v);
+}
