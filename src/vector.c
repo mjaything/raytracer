@@ -72,6 +72,18 @@ double      vector_magnitude(t_vector v)
     return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
+t_vector    normalize(t_vector v)
+{
+    double magnitude;
+
+    magnitude = vector_magnitude(v);
+    v.x = v.x / magnitude;
+    v.y = v.y / magnitude;
+    v.z = v.z / magnitude;
+
+    return (v);
+}
+
 t_vector    cross_product(t_vector v1, t_vector v2)
 {
     t_vector v;
