@@ -56,6 +56,17 @@ t_vector    multiply_vector_by_scalar(t_vector v1, double c)
     return (v);
 }
 
+t_vector    divide_vector_by_scalar(t_vector v1, double c)
+{
+    t_vector v;
+
+    v.x = v1.x / c;
+    v.y = v1.y / c;
+    v.z = v1.z / c;
+
+    return (v);
+}
+
 t_vector    cross_product(t_vector v1, t_vector v2)
 {
     t_vector v;
