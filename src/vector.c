@@ -67,6 +67,11 @@ t_vector    divide_vector_by_scalar(t_vector v1, double c)
     return (v);
 }
 
+double      vector_magnitude(t_vector v)
+{
+    return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
 t_vector    cross_product(t_vector v1, t_vector v2)
 {
     t_vector v;
