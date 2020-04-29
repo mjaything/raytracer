@@ -45,6 +45,17 @@ t_vector    negate_vector(t_vector v1)
     return (v);
 }
 
+t_vector    multiply_vector_by_scalar(t_vector v1, double c)
+{
+    t_vector v;
+
+    v.x = c * v1.x;
+    v.y = c * v1.y;
+    v.z = c * v1.z;
+
+    return (v);
+}
+
 t_vector    cross_product(t_vector v1, t_vector v2)
 {
     t_vector v;
