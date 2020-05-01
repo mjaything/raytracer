@@ -157,7 +157,7 @@ int transpose_matrix(t_matrix *matrix)
     return 0;
 }
 
-int determinant_2x2(t_matrix *matrix)
+int calculate_determinant_2x2(t_matrix *matrix)
 {
     if (matrix.row != 2 || matrix.column != 2)
         return NULL;
@@ -197,4 +197,18 @@ t_matrix *create_submatrix(t_matrix *matrix, int i, int j)
         k++;
     }
     return submatrix;
+}
+
+int calculate_minor_3x3(t_matrix *matrix, int i, int j)
+{
+    if (matrix.row != 3 || matrix.column != 3)
+        return NULL;
+
+    int minor;
+
+    t_matrix *submatrix = (t_matrix *)malloc(sizeof(t_matrix));
+    submatrix = create_submatrix(matrix, i, j);
+    minor = calculate_determinant_2x2(submatrix);
+
+    return (minor);
 }
