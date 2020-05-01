@@ -53,17 +53,35 @@ int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
         return 0;
     }
     int i;
+    int j;
 
     i = 0;
-    while (i < matrix1.row * matrix1.column)
+    while (i < matrix1.row)
     {
-        if (matrix1.data[i] != matrix2.data[2])
+        j = 0;
+        while (j < matrix1.column)
         {
-            return 0;
+            if (matrix1.data[i] != matrix2.data[2])
+                return 0;
+            j++;
         }
         i++;
     }
     return 1;
+}
+
+int matrix_multiplication_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
+{
+    int k;
+    int value;
+
+    k = 0;
+    while (k < matrix1.column)
+    {
+        v += matrix1.value[i][k] * matrix2.value[k][j];
+        k++;
+    }
+    return value;
 }
 
 int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
@@ -85,19 +103,9 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
         j = 0;
         while (j < result_matrix.column)
         {
-
+            result_matrix.value[i][j] = matrix_multiplication_helper(i, j, matrix1, matrix2);
             j++;
         }
         i++;
     }
-
-    /*
-    while (i < matrix1.row * matrix2.column)
-    {
-        data[i] = matrix1.value[] * matrix2.value[] \
-        + matrix1.value[] * matrix2.value[] \
-        + matrix1.value[] * matrix2.value[];
-        i++;
-    }
-    */
 }
