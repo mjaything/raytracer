@@ -132,7 +132,7 @@ int *create_identity_matrix(int row, int column)
         }
         i++;
     }
-    return 1;
+    return matrix;
 }
 
 int transpose_matrix(t_matrix *matrix)
