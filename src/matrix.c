@@ -109,3 +109,25 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
         i++;
     }
 }
+
+int transpose_matrix(t_matrix *matrix)
+{
+    if (!matrix)
+        return NULL;
+    t_matrix transposed_matrix = create_matrix(matrix.column, matrix.row);
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < matrix.row)
+    {
+        while (j < matrix.column)
+        {
+            transposed_matrix.value[j][i] = matrix.value[i][j];
+            j++;
+        }
+        i++;
+    }
+    return 0;
+}
