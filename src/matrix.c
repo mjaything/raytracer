@@ -20,25 +20,29 @@ t_matrix *create_matrix(int row, int column)
     }
 
     t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
-
     matrix.row = row;
     matrix.column = column;
-
     matrix.value = (double *)malloc(row * column * sizeof(double));
 
     int i;
+    int j;
 
     i = 0;
-    while (i < row * column)
+    while (i < row)
     {
-        matrix.data[i] = 0.0;
+        j = 0;
+        while (j < column)
+        {
+            matrix.value[i][j] = 0.0;
+            j++;
+        }
         i++;
     }
 
     return (matrix);
 }
 
-int is_same_matrix(t_matrix matrix1, t_matrix t_matrix2)
+int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
 {
     if (!matrix1 || !matrix2)
     {
@@ -62,3 +66,38 @@ int is_same_matrix(t_matrix matrix1, t_matrix t_matrix2)
     return 1;
 }
 
+int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
+{
+    if (!matrix1 || !matrix2)
+    {
+        return NULL;
+    }
+
+    t_matrix *result_matrix = (t_matrix *)malloc(sizeof(t_matrix));
+    result_matrix = create_matrix(matrix1.row, matrix2.column);
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < result_matrix.row)
+    {
+        j = 0;
+        while (j < result_matrix.column)
+        {
+
+            j++;
+        }
+        i++;
+    }
+
+    /*
+    while (i < matrix1.row * matrix2.column)
+    {
+        data[i] = matrix1.value[] * matrix2.value[] \
+        + matrix1.value[] * matrix2.value[] \
+        + matrix1.value[] * matrix2.value[];
+        i++;
+    }
+    */
+}
