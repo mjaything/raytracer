@@ -27,6 +27,8 @@ t_matrix *create_matrix(int row, int column)
     matrix.value = (double *)malloc(row * column * sizeof(double));
 
     int i;
+
+    i = 0;
     while (i < row * column)
     {
         matrix.data[i] = 0.0;
@@ -34,4 +36,27 @@ t_matrix *create_matrix(int row, int column)
     }
 
     return (matrix);
+}
+
+int is_same_matrix(t_matrix matrix1, t_matrix t_matrix2)
+{
+    if (!matrix1 || !matrix2)
+    {
+        return NULL;
+    }
+    if (matrix1.row != matrix2.row || matrix1.column != matrix2.column)
+    {
+        return 0;
+    }
+    int i;
+
+    i = 0;
+    while (i < matrix1.row * matrix1.column)
+    {
+        if (matrix1.data[i] != matrix2.data[2])
+        {
+            return 0;
+        }
+    }
+    return 1;
 }
