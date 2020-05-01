@@ -228,3 +228,18 @@ int calculate_cofactor(t_matrix *matrix, int i, int j)
     return (cofactor);
 }
 
+int calculate_determinant(t_matrix *matrix)
+{
+    int determinant;
+    int i;
+    
+    determinant = 0;
+    i = 0;
+    while (i < matrix.column)
+    {
+        determinant += matrix.value[0][i] * calculate_cofactor(matrix, 0, i);
+        i++;
+    }
+
+    return determinant;
+}
