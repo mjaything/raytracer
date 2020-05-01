@@ -57,6 +57,8 @@ int is_same_matrix(t_matrix matrix1, t_matrix t_matrix2)
         {
             return 0;
         }
+        i++;
     }
     return 1;
 }
+
