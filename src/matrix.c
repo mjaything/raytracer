@@ -110,6 +110,37 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
     }
 }
 
+int is_identity_matrix(t_matrix *matrix)
+{
+    if (!matrix)
+        return NULL;
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < matrix.row)
+    {
+        j = 0;
+        while (j < matrix.column)
+        {
+            if (matrix.row == matrix.column)
+            {
+                if (matrix.value[i][j] != 1)
+                    return 0;
+            }
+            else
+            {
+                if (matrix.value[i][j] ! = 0)
+                    return 0;
+            }
+            j++;
+        }
+        i++;
+    }
+    return 1;
+}
+
 int transpose_matrix(t_matrix *matrix)
 {
     if (!matrix)
