@@ -108,7 +108,7 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
     }
 }
 
-int *create_identity_matrix(int row, int column)
+t_matrix *create_identity_matrix(int row, int column)
 {
     if (row <= 0 || column <= 0)
         return NULL;
