@@ -15,9 +15,7 @@
 t_matrix *create_matrix(int row, int column)
 {
     if (row <= 0 || column <= 0)
-    {
         return NULL;
-    }
 
     t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
     matrix.row = row;
@@ -110,30 +108,26 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
     }
 }
 
-int is_identity_matrix(t_matrix *matrix)
+int *create_identity_matrix(int row, int column)
 {
-    if (!matrix)
+    if (row <= 0 || column <= 0)
         return NULL;
+
+    t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
 
     int i;
     int j;
 
     i = 0;
-    while (i < matrix.row)
+    while (i < row)
     {
         j = 0;
-        while (j < matrix.column)
+        while (j < column)
         {
-            if (matrix.row == matrix.column)
-            {
-                if (matrix.value[i][j] != 1)
-                    return 0;
-            }
+            if (row == column)
+                matrix.value[i][j] = 1;
             else
-            {
-                if (matrix.value[i][j] ! = 0)
-                    return 0;
-            }
+                matrix.value[i][j] = 0;
             j++;
         }
         i++;
