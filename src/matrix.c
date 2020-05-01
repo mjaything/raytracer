@@ -294,4 +294,5 @@ t_matrix *create_inversion_matrix(t_matrix *matrix)
         }
         i++;
     }
+    return inversion_matrix;
 }
