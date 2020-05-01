@@ -156,3 +156,15 @@ int transpose_matrix(t_matrix *matrix)
     }
     return 0;
 }
+
+int determinant_2x2(t_matrix *matrix)
+{
+    if (matrix.row != 2 || matrix.column != 2)
+        return NULL;
+
+    int determinant;
+
+    determinant = matrix.value[0][0] * matrix.value[1][1] - matrix.value[0][1] * matrix.value[1][0];
+    return (determinant);
+}
+
