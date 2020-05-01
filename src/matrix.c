@@ -212,3 +212,16 @@ int calculate_minor_3x3(t_matrix *matrix, int i, int j)
 
     return (minor);
 }
+
+int calculate_cofactor(int minor, int i, int j)
+{
+    int cofactor;
+
+    if (i == 0 && j == 1 || i == 1 && j == 0 || 
+        i == 1 && j == 2 || i == 2 && j == 1)
+        cofactor = -minor;
+    else
+        cofactor = minor;
+        
+    return (cofactor);
+}
