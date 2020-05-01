@@ -70,7 +70,7 @@ int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
     return 1;
 }
 
-int matrix_multiplication_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
+int multiply_matrix_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
 {
     int k;
     int value;
