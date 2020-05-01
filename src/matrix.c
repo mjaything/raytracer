@@ -243,3 +243,55 @@ int calculate_determinant(t_matrix *matrix)
 
     return determinant;
 }
+
+t_matrix *create_cofactor_matrix(t_matrix *matrix)
+{
+    if (!matrix)
+        return NULL;
+
+    t_matrix *cofactor_matrix = (t_matrix *)malloc(sizeof(t_matrix));
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < matrix.row)
+    {
+        j = 0;
+        while (j < matrix.column)
+        {
+            cofactor_matrix.value[i][j] = calculate_cofactor(matrix, i, j);
+            j++;
+        }
+        i++;
+    }
+    return cofactor_matrix;
+}
+
+t_matrix *create_inversion_matrix(t_matrix *matrix)
+{
+    if (!matrix)
+        return NULL;
+    int determinant = calculate_determinant(matrix)
+    if (determinant == 0)
+        return NULL;
+
+    t_matrix *inversion_matrix = (t_matrix *)malloc(sizeof(t_matrix));    
+    inversion_matrix = create_cofactor_matrix(matrix);
+    transpose_matrix(inversion_matrix);
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < cofactor_matrix.row)
+    {
+        j = 0;
+        while (j < cofactor_matrix.column)
+        {
+            inversion_matrix.value[i][j] = inversion_matrix.value[i][j] / determinant;
+            j++;
+        }
+        i++;
+    }
+}
