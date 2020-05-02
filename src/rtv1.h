@@ -24,9 +24,11 @@
 
 typedef struct      s_tuple
 {
-
+    double x;
+    double y;
+    double z;
+    double w;
 }                   t_tuple;
-
 
 typedef struct      s_vector
 {
@@ -39,7 +41,7 @@ typedef struct      s_matrix
 {
     int     row;
     int     column;
-    double  **value;
+    double  *value;
 }                   t_matrix;
 
 typedef struct      s_env
