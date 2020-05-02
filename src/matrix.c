@@ -322,3 +322,14 @@ t_matrix *create_scaling_matrix(double x, double y, double z)
     set_element(scaling_matrix, 3, 3, z);
     return scaling_matrix;
 }
+
+t_matrix *create_rotation_matrix_x(double radian)
+{
+    t_matrix *rotation_matrix_x;
+    rotation_matrix_x = create_identity_matrix(4, 4);
+    set_element(scaling_matrix, 2, 2, cos(radian));
+    set_element(scaling_matrix, 2, 3, -sin(radian));
+    set_element(scaling_matrix, 3, 2, sin(radian));
+    set_element(scaling_matrix, 3, 3, cos(radian));
+    return scaling_matrix;
+}
