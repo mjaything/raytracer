@@ -344,3 +344,14 @@ t_matrix *create_rotation_matrix_y(double radian)
     set_element(rotation_matrix_y, 3, 3, cos(radian));
     return rotation_matrix_y;
 }
+
+t_matrix *create_rotation_matrix_z(double radian)
+{
+    t_matrix *rotation_matrix_z;
+    rotation_matrix_z = create_identity_matrix(4, 4);
+    set_element(rotation_matrix_z, 1, 1, cos(radian));
+    set_element(rotation_matrix_z, 1, 2, -sin(radian));
+    set_element(rotation_matrix_z, 2, 1, sin(radian));
+    set_element(rotation_matrix_z, 2, 2, cos(radian));
+    return rotation_matrix_z;
+}
