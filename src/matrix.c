@@ -16,27 +16,19 @@ t_matrix *create_matrix(int row, int column)
 {
     if (row <= 0 || column <= 0)
         return NULL;
-
     t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
     matrix->row = row;
     matrix->column = column;
-    matrix->value = (double **)malloc(row * column * sizeof(double *));
+    matrix->value = (double *)malloc(row * column * sizeof(double));
 
     int i;
-    int j;
 
     i = 0;
-    while (i < row)
+    while (i < row * column)
     {
-        j = 0;
-        while (j < column)
-        {
-            matrix->value[i][j] = 0.0;
-            j++;
-        }
+        matrix->value[i] = 0.0;
         i++;
     }
-
     return (matrix);
 }
 
