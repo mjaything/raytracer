@@ -32,6 +32,16 @@ t_matrix *create_matrix(int row, int column)
     return (matrix);
 }
 
+int set_element(t_matrix *matrix, int row, int column, double value)
+{
+    if (!matrix)
+        return -1;
+    if (row <= 0 || column <= 0 || row > matrix->row || col > matrix->column)
+        return -1;
+    ELEMENT(matrix, row, column) = value;
+    return 0;
+}
+
 int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
 {
     if (!matrix1 || !matrix2)
