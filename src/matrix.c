@@ -327,9 +327,20 @@ t_matrix *create_rotation_matrix_x(double radian)
 {
     t_matrix *rotation_matrix_x;
     rotation_matrix_x = create_identity_matrix(4, 4);
-    set_element(scaling_matrix, 2, 2, cos(radian));
-    set_element(scaling_matrix, 2, 3, -sin(radian));
-    set_element(scaling_matrix, 3, 2, sin(radian));
-    set_element(scaling_matrix, 3, 3, cos(radian));
-    return scaling_matrix;
+    set_element(rotation_matrix_x, 2, 2, cos(radian));
+    set_element(rotation_matrix_x, 2, 3, -sin(radian));
+    set_element(rotation_matrix_x, 3, 2, sin(radian));
+    set_element(rotation_matrix_x, 3, 3, cos(radian));
+    return rotation_matrix_x;
+}
+
+t_matrix *create_rotation_matrix_y(double radian)
+{
+    t_matrix *rotation_matrix_y;
+    rotation_matrix_y = create_identity_matrix(4, 4);
+    set_element(rotation_matrix_y, 1, 1, cos(radian));
+    set_element(rotation_matrix_y, 1, 3, sin(radian));
+    set_element(rotation_matrix_y, 3, 1, -sin(radian));
+    set_element(rotation_matrix_y, 3, 3, cos(radian));
+    return rotation_matrix_y;
 }
