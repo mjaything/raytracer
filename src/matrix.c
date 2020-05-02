@@ -20,7 +20,7 @@ t_matrix *create_matrix(int row, int column)
     t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
     matrix->row = row;
     matrix->column = column;
-    matrix->value = (double *)malloc(row * column * sizeof(double));
+    matrix->value = (double **)malloc(row * column * sizeof(double *));
 
     int i;
     int j;
@@ -89,7 +89,7 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
         return NULL;
     }
 
-    t_matrix *result_matrix = (t_matrix *)malloc(sizeof(t_matrix));
+    t_matrix *result_matrix;
     result_matrix = create_matrix(matrix1->row, matrix2->column);
 
     int i;
@@ -113,7 +113,8 @@ t_matrix *create_identity_matrix(int row, int column)
     if (row <= 0 || column <= 0)
         return NULL;
 
-    t_matrix *matrix = (t_matrix *)malloc(sizeof(t_matrix));
+    t_matrix *matrix;
+    matrix = create_matrix(row, column);
 
     int i;
     int j;
@@ -135,26 +136,28 @@ t_matrix *create_identity_matrix(int row, int column)
     return matrix;
 }
 
-int transpose_matrix(t_matrix *matrix)
+t_matrix *create_transposed_matrix(t_matrix *matrix)
 {
     if (!matrix)
         return NULL;
-    t_matrix transposed_matrix = create_matrix(matrix->column, matrix->row);
+
+    t_matrix *transposed_matrix;
+    transposed_matrix = create_matrix(matrix->column, matrix->row);
 
     int i;
     int j;
 
     i = 0;
-    while (i < matrix->row)
+    while (i < matrix->column)
     {
-        while (j < matrix->column)
+        while (j < matrix->row)
         {
-            transposed_matrix->value[j][i] = matrix->value[i][j];
+            transposed_matrix->value[i][j] = matrix->value[j][i];
             j++;
         }
         i++;
     }
-    return 0;
+    return transposed_matrix;
 }
 
 int calculate_determinant_2x2(t_matrix *matrix)
@@ -173,10 +176,8 @@ t_matrix *create_submatrix(t_matrix *matrix, int i, int j)
     if (row <= 0 || column <= 0)
         return NULL;
 
-    t_matrix *submatrix = (t_matrix *)malloc(sizeof(t_matrix));
-
-    submatrix->row = matrix->row - 1;
-    submatrix->column = matrix->column - 1;
+    t_matrix *submatrix;
+    submatrix = create_matrix(matrix->row - 1, matrix->column - 1);
 
     int k;
     int l;
@@ -249,7 +250,8 @@ t_matrix *create_cofactor_matrix(t_matrix *matrix)
     if (!matrix)
         return NULL;
 
-    t_matrix *cofactor_matrix = (t_matrix *)malloc(sizeof(t_matrix));
+    t_matrix *cofactor_matrix;
+    cofactor_matrix = create_matrix(matrix->row, matrix->column);
 
     int i;
     int j;
@@ -276,9 +278,9 @@ t_matrix *create_inversion_matrix(t_matrix *matrix)
     if (determinant == 0)
         return NULL;
 
-    t_matrix *inversion_matrix = (t_matrix *)malloc(sizeof(t_matrix));    
+    t_matrix *inversion_matrix;
     inversion_matrix = create_cofactor_matrix(matrix);
-    transpose_matrix(inversion_matrix);
+    inversion_matrix = create_transposed_matrix(inversion_matrix);
 
     int i;
     int j;
@@ -289,7 +291,7 @@ t_matrix *create_inversion_matrix(t_matrix *matrix)
         j = 0;
         while (j < cofactor_matrix->column)
         {
-            inversion_matrix->value[i][j] = inversion_matrix->value[i][j] / determinant;
+            inversion_matrix->value[i][j] /= determinant;
             j++;
         }
         i++;
