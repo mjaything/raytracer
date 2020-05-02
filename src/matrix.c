@@ -312,3 +312,13 @@ t_matrix *create_translation_matrix(double x, double y, double z)
     set_element(translation_matrix, 3, 4, z);
     return translation_matrix;
 }
+
+t_matrix *create_scaling_matrix(double x, double y, double z)
+{
+    t_matrix *scaling_matrix;
+    scaling_matrix = create_identity_matrix(4, 4);
+    set_element(scaling_matrix, 1, 1, x);
+    set_element(scaling_matrix, 2, 2, y);
+    set_element(scaling_matrix, 3, 3, z);
+    return scaling_matrix;
+}
