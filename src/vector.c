@@ -32,99 +32,64 @@ t_tuple     create_vector(double x, double y, double z)
     return create_tuple(x, y, z, 0.0);
 }
 
-t_vector    add_vector(t_vector v1, t_vector v2)
+t_tuple     add_vector(t_tuple vector1, t_tuple vector2)
 {
-    t_vector v;
-
-    v.x = v1.x + v2.x;
-    v.y = v1.y + v2.y;
-    v.z = v1.z + v2.z;
-
-    return (v);
+    return create_vector(vector1.x + vector2.x, vector1.y + vector2.y, \
+                            vector1.z + vector2.z);
 }
 
-t_vector    subtract_vector(t_vector v1, t_vector v2)
+t_tuple     subtract_vector(t_tuple vector1, t_tuple vector2)
 {
-    t_vector v;
-
-    v.x = v1.x - v2.x;
-    v.y = v1.y - v2.y;
-    v.z = v1.z - v2.z;
-
-    return (v);
+    return create_vector(vector1.x - vector2.x, vector1.y - vector2.y, \
+                            vector1.z + vector2.z);
 }
 
-t_vector    negate_vector(t_vector v)
+t_tuple     negate_vector(t_tuple vector)
 {
-    v.x = -v.x;
-    v.y = -v.y;
-    v.z = -v.z;
-
-    return (v);
+    return create_vector(-vector.x, -vector.y, -vector.z);
 }
 
-t_vector    multiply_vector_by_scalar(t_vector v, double c)
+t_tuple     multiply_vector_by_scalar(t_tuple vector, double c)
 {
-    t_vector v;
-
-    v.x = c * v.x;
-    v.y = c * v.y;
-    v.z = c * v.z;
-
-    return (v);
+    return create_vector(c * vector.x, c * vector.y, c * vector.z);
 }
 
-t_vector    divide_vector_by_scalar(t_vector v, double c)
+t_tuple     divide_vector_by_scalar(t_tuple vector, double c)
 {
-    t_vector v;
-
-    v.x = v.x / c;
-    v.y = v.y / c;
-    v.z = v.z / c;
-
-    return (v);
+    return create_vector(vector.x / c, vector.y / c, vector.z / c);
 }
 
-double      calculate_magnitude(t_vector v)
+double      calculate_magnitude(t_tuple vector)
 {
-    return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+    return (sqrt(vector.x * vector.x + vector.y * vector.y + \
+                vector.z * vector.z));
 }
 
-t_vector    normalize(t_vector v)
+t_vector    normalize(t_tuple vector)
 {
     double magnitude;
 
     magnitude = calculate_magnitude(v);
-    v.x = v.x / magnitude;
-    v.y = v.y / magnitude;
-    v.z = v.z / magnitude;
-
-    return (v);
+    return create_vector(vector.x / magnitude, vector.y / magnitude, \
+                            vector.z / magnitude);
 }
 
-double      dot_product(t_vector v1, t_vector v2)
+double      dot_product(t_tuple vector1, t_tuple vector2)
 {
-    return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+    return (vector1.x * vector2.x + vector1.y * vector2.y + \
+            vector1.z * vector2.z);
 }
 
-t_vector    cross_product(t_vector v1, t_vector v2)
+t_vector    cross_product(t_tuple vector1, t_tuple vector2)
 {
-    t_vector v;
-
-    v.x = v1.y * v2.z - v2.y * v1.z;
-    v.y = v1.z * v2.x - v2.z * v1.x;
-    v.z = v1.x * v2.y - v2.x * v1.y;
-
-    return (v);
+    return create_vector(vector1.y * vector2.z - vector2.y * vector1.z,\
+                            vector1.z * vector2.x - vector2.z * vector1.x,
+                            vector1.x * vector2.y - vector2.x * vector1.y);
 }
 
-t_vector    hadamard_product(t_vector v1, t_vector v2)
+t_vector    hadamard_product(t_tuple vector1, t_tuple vector2)
 {
-    t_vector v;
-
-    v.x = v1.x * v2.x;
-    v.y = v1.y * v2.y;
-    v.z = v1.z * v2.z;
-
-    return (v);
+    return create_vector(vector1.x * vector2.x,\
+                            vector1.y * vector2.y,
+                            vector1.z * vector2.z);
 }
