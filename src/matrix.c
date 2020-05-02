@@ -302,3 +302,13 @@ t_matrix *create_inversion_matrix(t_matrix *matrix)
     }
     return inversion_matrix;
 }
+
+t_matrix *create_translation_matrix(double x, double y, double z)
+{
+    t_matrix *translation_matrix;
+    translation_matrix = create_identity_matrix(4, 4);
+    set_element(translation_matrix, 1, 4, x);
+    set_element(translation_matrix, 2, 4, y);
+    set_element(translation_matrix, 3, 4, z);
+    return translation_matrix;
+}
