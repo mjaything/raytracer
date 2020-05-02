@@ -45,13 +45,10 @@ int set_element(t_matrix *matrix, int row, int column, double value)
 int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
 {
     if (!matrix1 || !matrix2)
-    {
-        return NULL;
-    }
+        return -1;
     if (matrix1->row != matrix2->row || matrix1->column != matrix2->column)
-    {
-        return 0;
-    }
+        return -1;
+
     int i;
     int j;
 
@@ -61,7 +58,8 @@ int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
         j = 0;
         while (j < matrix1->column)
         {
-            if (matrix1->value[i][j] != matrix2->value[i][j])
+            if (ELEMENT(matrix1, i + 1, j + 1) != \
+                ELEMENT(matrix2, i + 1, j + 1))
                 return 0;
             j++;
         }
@@ -70,7 +68,7 @@ int is_same_matrix(t_matrix *matrix1, t_matrix *matrix2)
     return 1;
 }
 
-int multiply_matrix_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
+int multiply_matrix_helper(t_matrix *matrix1, t_matrix *matrix2, int i, int j)
 {
     int k;
     int value;
@@ -78,7 +76,8 @@ int multiply_matrix_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
     k = 0;
     while (k < matrix1->column)
     {
-        v += matrix1->value[i][k] * matrix2->value[k][j];
+        value += ELEMENT(matrix1, i + 1, k + 1) * \
+                ELEMENT(matrix2, k + 1, j + 1);
         k++;
     }
     return value;
@@ -87,9 +86,7 @@ int multiply_matrix_helper(int i, int j, t_matrix *matrix1, t_matrix *matrix2)
 int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
 {
     if (!matrix1 || !matrix2)
-    {
         return NULL;
-    }
 
     t_matrix *result_matrix;
     result_matrix = create_matrix(matrix1->row, matrix2->column);
@@ -103,7 +100,8 @@ int multiply_matrix(t_matrix *matrix1, t_matrix *matrix2)
         j = 0;
         while (j < result_matrix->column)
         {
-            result_matrix->value[i][j] = matrix_multiplication_helper(i, j, matrix1, matrix2);
+            ELEMENT(result_matrix, i + 1, j + 1) = \
+            matrix_multiplication_helper(matrix1, matrix2, i, j);
             j++;
         }
         i++;
@@ -128,9 +126,9 @@ t_matrix *create_identity_matrix(int row, int column)
         while (j < column)
         {
             if (row == column)
-                matrix->value[i][j] = 1;
+                ELEMENT(matrix, i + 1, j + 1) = 1;
             else
-                matrix->value[i][j] = 0;
+                ELEMENT(matrix, i + 1, j + 1) = 0;
             j++;
         }
         i++;
@@ -154,7 +152,8 @@ t_matrix *create_transposed_matrix(t_matrix *matrix)
     {
         while (j < matrix->row)
         {
-            transposed_matrix->value[i][j] = matrix->value[j][i];
+            ELEMENT(transposed_matrix, i + 1, j + 1) = \
+            ELEMENT(matrix, j + 1, i + 1);
             j++;
         }
         i++;
@@ -169,7 +168,8 @@ int calculate_determinant_2x2(t_matrix *matrix)
 
     int determinant;
 
-    determinant = matrix->value[0][0] * matrix->value[1][1] - matrix->value[0][1] * matrix->value[1][0];
+    determinant = ELEMENT(matrix, 1, 1) * ELEMENT(matrix, 2, 2) - \
+                    ELEMENT(matrix, 1, 2) * ELEMENT(matrix, 2, 1);
     return (determinant);
 }
 
@@ -194,7 +194,7 @@ t_matrix *create_submatrix(t_matrix *matrix, int i, int j)
         while (l < submatrix->column)
         {
             n = (l >= j ? l + 1 : l);
-            submatrix->value[k][l] = matrix->value[m][n];
+            ELEMENT(submatrix, k + 1, l + 1) = ELEMENT(matrix, m + 1, n + 1);
             l++;
         }
         k++;
@@ -240,7 +240,8 @@ int calculate_determinant(t_matrix *matrix)
     i = 0;
     while (i < matrix->column)
     {
-        determinant += matrix->value[0][i] * calculate_cofactor(matrix, 0, i);
+        determinant += ELEMENT(matrix, 1, i + 1) * \
+                        calculate_cofactor(matrix, 0, i);
         i++;
     }
 
@@ -264,7 +265,8 @@ t_matrix *create_cofactor_matrix(t_matrix *matrix)
         j = 0;
         while (j < matrix->column)
         {
-            cofactor_matrix->value[i][j] = calculate_cofactor(matrix, i, j);
+            ELEMENT(cofactor_matrix, i + 1, j + 1) = \
+                calculate_cofactor(matrix, i, j);
             j++;
         }
         i++;
@@ -293,7 +295,7 @@ t_matrix *create_inversion_matrix(t_matrix *matrix)
         j = 0;
         while (j < cofactor_matrix->column)
         {
-            inversion_matrix->value[i][j] /= determinant;
+            ELEMENT(inversion_matrix, i + 1, j + 1) /= determinant;
             j++;
         }
         i++;
