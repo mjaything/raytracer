@@ -12,6 +12,16 @@
 
 #include "rtv1.h"
 
+t_tuple     create_tuple(double x, double y, double z, double w)
+{
+    t_tuple tuple;
+    tuple.x = x;
+    tuple.y = y;
+    tuple.z = z;
+    tuple.w = w;
+    return tuple;
+}
+
 t_vector    add_vector(t_vector v1, t_vector v2)
 {
     t_vector v;
