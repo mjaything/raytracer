@@ -27,6 +27,11 @@ t_tuple     create_point(double x, double y, double z)
     return create_tuple(x, y, z, 1.0);
 }
 
+t_tuple     create_vector(double x, double y, double z)
+{
+    return create_tuple(x, y, z, 0.0);
+}
+
 t_vector    add_vector(t_vector v1, t_vector v2)
 {
     t_vector v;
