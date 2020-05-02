@@ -355,3 +355,17 @@ t_matrix *create_rotation_matrix_z(double radian)
     set_element(rotation_matrix_z, 2, 2, cos(radian));
     return rotation_matrix_z;
 }
+
+t_matrix *create_shearing_matrix(double xy, double xz, double yx, double yz, \
+                                double zx, double zy)
+{
+    t_matrix *shearing_matrix;
+    shearing_matrix = create_identity_matrix(4, 4);
+    set_element(shearing_matrix, 1, 2, xy);
+    set_element(shearing_matrix, 1, 3, xz);
+    set_element(shearing_matrix, 2, 1, yx);
+    set_element(shearing_matrix, 2, 3, yz);
+    set_element(shearing_matrix, 3, 1, zx);
+    set_element(shearing_matrix, 3, 2, zy);
+    return shearing_matrix;
+}
