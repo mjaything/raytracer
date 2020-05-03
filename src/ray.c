@@ -21,3 +21,10 @@ t_ray     create_ray(t_tuple origin, t_tuple direction)
     ray.direction = direction;
     return ray;
 }
+
+t_tuple     find_position(t_ray ray, double distance)
+{
+    t_tuple position;
+    position = ray.origin + ray.direction * distance;
+    return position;
+}
