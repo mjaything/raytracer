@@ -12,6 +12,7 @@
 
 #include "rtv1.h"
 
+// create a ray
 t_ray     create_ray(t_tuple origin, t_tuple direction)
 {
     t_ray ray;
@@ -22,9 +23,32 @@ t_ray     create_ray(t_tuple origin, t_tuple direction)
     return ray;
 }
 
-t_tuple     find_position(t_ray ray, double distance)
+// compute the point at the given distance t along the ray
+t_tuple     find_position(t_ray ray, double time)
 {
     t_tuple position;
-    position = ray.origin + ray.direction * distance;
+    position = ray.origin + ray.direction * time;
     return position;
+}
+
+t_ray       translate_ray(t_ray ray, t_matrix translation_matrix)
+{
+    t_ray transformed_ray;
+    transformed_ray.origin.x = ray.origin.x + translation_matrix[0][4];
+    transformed_ray.origin.y = ray.origin.y + translation_matrix[1][4];
+    transformed_ray.origin.z = ray.origin.z + translation_matrix[2][4];
+    transformed_ray.direction = ray.direction;
+    return transformed_ray;
+}
+
+t_ray       scale_ray(t_ray ray, t_matrix scaling_matrix)
+{
+    t_ray transformed_ray;
+    transformed_ray.origin.x = ray.origin.x * scaling_matrix[0][0];
+    transformed_ray.origin.y = ray.origin.y * scaling_matrix[1][1];
+    transformed_ray.origin.z = ray.origin.z * scaling_matrix[2][2];
+    transformed_ray.direction.x = ray.direction.x * scaling_matrix[0][0];
+    transformed_ray.direction.y = ray.direction.y * scaling_matrix[1][1];
+    transformed_ray.direction.z = ray.direction.z * scaling_matrix[2][2];
+    return transformed_ray;
 }
