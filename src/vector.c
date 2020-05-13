@@ -93,22 +93,31 @@ t_vector    normalize_vector(t_vector vector)
     return normalized_vector;
 }
 
-double      dot_product(t_tuple vector1, t_tuple vector2)
+double      dot_product(t_vector vector1, t_vector vector2)
 {
-    return (vector1.x * vector2.x + vector1.y * vector2.y + \
-            vector1.z * vector2.z);
+    double number;
+
+    number = vector1.x * vector2.x + vector1.y * vector2.y + \
+            vector1.z * vector2.z; 
+    return number;
 }
 
-t_tuple    cross_product(t_tuple vector1, t_tuple vector2)
+t_vector    cross_product(t_vector vector1, t_vector vector2)
 {
-    return create_vector(vector1.y * vector2.z - vector2.y * vector1.z,\
-                            vector1.z * vector2.x - vector2.z * vector1.x,
-                            vector1.x * vector2.y - vector2.x * vector1.y);
+    t_vector resultant_vector;
+
+    resultant_vector.x = vector1.y * vector2.z - vector2.y * vector1.z;
+    resultant_vector.y = vector1.z * vector2.x - vector2.z * vector1.x;
+    resultant_vector.z = vector1.x * vector2.y - vector2.x * vector1.y;
+    return resultant_vector;
 }
 
-t_tuple    hadamard_product(t_tuple vector1, t_tuple vector2)
+t_vector    hadamard_product(t_vector vector1, t_vector vector2)
 {
-    return create_vector(vector1.x * vector2.x,\
-                            vector1.y * vector2.y,
-                            vector1.z * vector2.z);
+    t_vector resultant_vector;
+    
+    resultant_vector.x = vector1.x * vector2.x;
+    resultant_vector.y = vector1.y * vector2.y;
+    resultant_vector.z = vector1.z * vector2.z;
+    return resultant_vector;
 }
