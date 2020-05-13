@@ -33,7 +33,7 @@ double	ft_atof(const char *str)
     {
         i++;
         while (str[i] >= '0' && str[i] <= '9')
-            number += (str[i++] - '0') / (n *= 10)
+            number += (str[i++] - '0') / (n *= 10);
     }
 	return (sign * number);
 }
