@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-kim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -115,9 +115,45 @@ t_vector    cross_product(t_vector vector1, t_vector vector2)
 t_vector    hadamard_product(t_vector vector1, t_vector vector2)
 {
     t_vector resultant_vector;
-    
+
     resultant_vector.x = vector1.x * vector2.x;
     resultant_vector.y = vector1.y * vector2.y;
     resultant_vector.z = vector1.z * vector2.z;
     return resultant_vector;
+}
+
+void        rotation_x_axis(t_vector *vector, double degrees)
+{
+    t_vector    rotated_vector;
+    double      radian;
+
+    radian = degrees_to_radian(degrees);
+    rotated_vector.x = vector->x;
+    rotated_vector.y = vector->y * cos(radian) + vector->z * sin(radian);
+    rotated_vector.z = vector->y * -sin(radian) + vector->z * cos(radian);
+    *vector = rotated_vector;
+}
+
+void        rotation_y_axis(t_vector *vector, double degrees)
+{
+    t_vector    rotated_vector;
+    double      radian;
+
+    radian = degrees_to_radian(degrees);
+    rotated_vector.x = vector->x * cos(radian) + vector->z * -sin(radian);
+    rotated_vector.y = vector->y;
+    rotated_vector.z = vector->x * sin(radian) + vector->z * cos(radian);
+    *vector = rotated_vector;
+}
+
+void        rotation_z_axis(t_vector *vector, double degrees)
+{
+    t_vector    rotated_vector;
+    double      radian;
+
+    radian = degrees_to_radian(degrees);
+    rotated_vector.x = vector->x * cos(radian) + vector->y * sin(radian);
+    rotated_vector.y = vector->x * -sin(radian) + vector->y * cos(radian);
+    rotated_vector.z = vector->z;
+    *vector = rotated_vector;
 }
