@@ -13,6 +13,57 @@
 #include "get_next_line.h"
 #include <unistd.h>
 
+int			save_line(char **line, char *content, char character)
+{
+	int		index;
+	char	*temp;
+
+	index = 0;
+	temp = *line;
+	while (content[index] != '\0' && content[index] != character)
+		index++;
+	if (!(*line = ft_strndup(content, index)))
+		return (0);
+	return (index);
+}
+
+int			read_line_end_range(const int fd, char **content)
+{
+	char	buffer[BUFF_SIZE + 1];
+	int		bytes_read;
+	char	*temp;
+
+	while ((bytes_read = read(fd, buffer, BUFF_SIZE)) > 0)
+	{
+		buffer[bytes_read] = '\0';
+		temp = *content;
+		if (!(*content = ft_strjoin(*content, buffer)))
+			return (-1);
+		free(temp);
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	return (bytes_read);
+}
+
+t_list		*get_node(int fd, t_list **node_chain)
+{
+	t_list	*node;
+
+	if (!node_chain)
+		return (NULL);
+	node = *node_chain;
+	while (node != NULL)
+	{
+		if ((int)(node->content_size) == fd)
+			return (node);
+		node = node->next;
+	}
+	node = ft_lstnew("", fd);
+	ft_lstadd(node_chain, node);
+	return (node);
+}
+
 int			get_next_line(const int fd, char **line)
 {
 	char			buffer[BUFF_SIZE + 1];
@@ -39,55 +90,4 @@ int			get_next_line(const int fd, char **line)
 	else
 		temp[0] = '\0';
 	return (1);
-}
-
-t_list		*get_node(int fd, t_list **node_chain)
-{
-	t_list	*node;
-
-	if (!node_chain)
-		return (NULL);
-	node = *node_chain;
-	while (node != NULL)
-	{
-		if ((int)(node->content_size) == fd)
-			return (node);
-		node = node->next;
-	}
-	node = ft_lstnew("", fd);
-	ft_lstadd(node_chain, node);
-	return (node);
-}
-
-int			read_line_end_range(const int fd, char **content)
-{
-	char	buffer[BUFF_SIZE + 1];
-	int		bytes_read;
-	char	*temp;
-
-	while ((bytes_read = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
-		buffer[bytes_read] = '\0';
-		temp = *content;
-		if (!(*content = ft_strjoin(*content, buffer)))
-			return (-1);
-		free(temp);
-		if (ft_strchr(buffer, '\n'))
-			break ;
-	}
-	return (bytes_read);
-}
-
-int			save_line(char **line, char *content, char character)
-{
-	int		index;
-	char	*temp;
-
-	index = 0;
-	temp = *line;
-	while (content[index] != '\0' && content[index] != character)
-		index++;
-	if (!(*line = ft_strndup(content, index)))
-		return (0);
-	return (index);
 }
