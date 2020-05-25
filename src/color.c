@@ -12,13 +12,12 @@
 
 #include "rtv1.h"
 
-t_tuple separate_rgb_components(int color)
+t_vector decompose_color(int color_hex)
 {
-    t_tuple rgb_components;
+    t_vector color_rgb;
 
-    rgb_components.x = (color >> 16) & 0xFF;
-    rgb_components.y = (color >> 8) & 0xFF;
-    rgb_components.z = (color >> 0) & 0xFF;
-
-    return (rgb_component);
+    color_rgb.x = (color_hex >> 16) & 0xFF;
+    color_rgb.y = (color_hex >> 8) & 0xFF;
+    color_rgb.z = (color_hex >> 0) & 0xFF;
+    return color_rgb;
 }
