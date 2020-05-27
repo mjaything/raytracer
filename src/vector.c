@@ -122,38 +122,18 @@ t_vector    hadamard_product(t_vector vector1, t_vector vector2)
     return resultant_vector;
 }
 
-void        rotation_x_axis(t_vector *vector, double degrees)
+void        clamp_vector(t_vector *vector, double min, double max)
 {
-    t_vector    rotated_vector;
-    double      radian;
-
-    radian = degrees_to_radian(degrees);
-    rotated_vector.x = vector->x;
-    rotated_vector.y = vector->y * cos(radian) + vector->z * sin(radian);
-    rotated_vector.z = vector->y * -sin(radian) + vector->z * cos(radian);
-    *vector = rotated_vector;
-}
-
-void        rotation_y_axis(t_vector *vector, double degrees)
-{
-    t_vector    rotated_vector;
-    double      radian;
-
-    radian = degrees_to_radian(degrees);
-    rotated_vector.x = vector->x * cos(radian) + vector->z * -sin(radian);
-    rotated_vector.y = vector->y;
-    rotated_vector.z = vector->x * sin(radian) + vector->z * cos(radian);
-    *vector = rotated_vector;
-}
-
-void        rotation_z_axis(t_vector *vector, double degrees)
-{
-    t_vector    rotated_vector;
-    double      radian;
-
-    radian = degrees_to_radian(degrees);
-    rotated_vector.x = vector->x * cos(radian) + vector->y * sin(radian);
-    rotated_vector.y = vector->x * -sin(radian) + vector->y * cos(radian);
-    rotated_vector.z = vector->z;
-    *vector = rotated_vector;
+    if (vector->x < min)
+        vector->x = min;
+    if (vector->x > max)
+        vector->x = max;
+    if (vector->y < min)
+        vector->y = min;
+    if (vector->y > max)
+        vector->y = max;
+    if (vector->z < min)
+        vector->z = min;
+    if (vector->z > max)
+        vector->z = max;
 }
