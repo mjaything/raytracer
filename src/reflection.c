@@ -12,7 +12,8 @@
 
 #include "rtv1.h"
 
-t_vector    reflect_vector(t_vector input_vector, t_vector surface_normal)
+t_vector    reflect_vector_at_surface_normal(t_vector input_vector, \
+                                                t_vector surface_normal)
 {
     t_vector    reflection_vector;
 
