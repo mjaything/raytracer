@@ -12,6 +12,13 @@
 
 #include "rtv1.h"
 
+void        configure_light_source(t_env *env, t_light light)
+{
+    env->ray.origin = light->origin;
+    env->ray.direction = normalize_vector(subtract_vector(env->ray.hit, \
+                                                            light->origin));
+}
+
 // create a ray
 t_ray     create_ray(t_tuple origin, t_tuple direction)
 {
@@ -24,9 +31,9 @@ t_ray     create_ray(t_tuple origin, t_tuple direction)
 }
 
 // compute the point at the given distance t along the ray
-t_tuple     find_position(t_ray ray, double time)
+t_vector     find_position(t_ray ray, double time)
 {
-    t_tuple position;
+    t_vector position;
     position = ray.origin + ray.direction * time;
     return position;
 }
