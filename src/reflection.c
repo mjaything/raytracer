@@ -12,6 +12,16 @@
 
 #include "rtv1.h"
 
+t_vector    reflect_vector(t_vector input_vector, t_vector surface_normal)
+{
+    t_vector    reflection_vector;
+
+    reflection_vector = subtract_vector(input_vector, \
+                        multiply_vector_by_scalar(surface_normal, \
+                        2 * dot_product(input_vector, surface_normal)));
+    return reflection_vector;
+}
+
 t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
                                             t_light *light)
 {
@@ -38,12 +48,12 @@ t_vector    calculate_specular_contribution(t_env *env, t_object *object, \
     double      factor;
     t_vector    specular_contribution;
 
-    light_vector = subtract_vector(light->origin, env->ray.hit);
-    light_vector = normalize_vector(light_vector);
-    eye_vector = subtract_vector(env->camera.origin, env->ray.hit);
-    eye_vector = normalize_vector(eye_vector);
-    reflect_vector = subtract_vector(add_vector(light_vector, eye_vector));
-    reflect_vector = normalize_vector(reflect_vector);
+    light_vector = normalize_vector(subtract_vector(light->origin, \
+                                                    env->ray.hit));
+    eye_vector = normalize_vector(subtract_vector(env->camera.origin, \
+                                                    env->ray.hit));
+    reflect_vector = normalize_vector(subtract_vector(add_vector(light_vector, \
+                                                                eye_vector)));
     eye_surface_normal_angle_cosine = \
         dot_product(object->surface_normal, reflect_vector);
     factor = pow(eye_surface_normal_angle_cosine, object->material.shininess);
