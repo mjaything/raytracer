@@ -29,7 +29,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	  ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	  ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_islower.c ft_isupper.c \
 	  ft_strichr.c ft_strnjoin.c get_next_line.c ft_strndup.c ft_atof.c \
-	  ft_atoi_base.c ft_pow.c ft_isspace.c
+	  ft_atoi_base.c ft_pow.c ft_isspace.c ft_hasdigit.c
 
 .PHONY : clean fclean re all
 
