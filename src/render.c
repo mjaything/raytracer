@@ -12,19 +12,6 @@
 
 #include "rtv1.h"
 
-void    render_scene(t_env *env)
-{
-    if (!(env->mlx_ptr = mlx_init()))
-        terminate(ERROR_MLX_INIT);
-    if (!(env->window.address = \
-        mlx_new_window(env->mlx_ptr, env->window.width, env->window.height, \
-                        env->arguments.scene)));
-        terminate(ERROR_MLX_INIT);
-    initialize_image(env);
-    display_loading();
-    trace(env);
-}
-
 void    trace(t_env *env)
 {
     env->ray.y = 0;
@@ -51,4 +38,17 @@ void    trace(t_env *env)
         }
         env->ray.y++;
     }
+}
+
+void    render_scene(t_env *env)
+{
+    if (!(env->mlx_ptr = mlx_init()))
+        terminate(ERROR_MLX_INIT);
+    if (!(env->window.address = \
+        mlx_new_window(env->mlx_ptr, env->window.width, env->window.height, \
+                        env->arguments.scene)));
+        terminate(ERROR_MLX_INIT);
+    initialize_image(env);
+    display_loading();
+    trace(env);
 }
