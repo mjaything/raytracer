@@ -112,16 +112,6 @@ t_vector    cross_product(t_vector vector1, t_vector vector2)
     return resultant_vector;
 }
 
-t_vector    hadamard_product(t_vector vector1, t_vector vector2)
-{
-    t_vector resultant_vector;
-
-    resultant_vector.x = vector1.x * vector2.x;
-    resultant_vector.y = vector1.y * vector2.y;
-    resultant_vector.z = vector1.z * vector2.z;
-    return resultant_vector;
-}
-
 void        clamp_vector(t_vector *vector, double min, double max)
 {
     if (vector->x < min)
