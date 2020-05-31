@@ -20,9 +20,9 @@ void    parse_arguments(t_env *env, int argc, char **argv)
         ft_strcmp(argv[7], "-z") == 0)
     {
         // camera angle condition to be added here if needed
-        env->arguments.angle_x = ft_atof(argv[4]);
-        env->arguments.angle_y = ft_atof(argv[6]);
-        env->arguments.angle_z = ft_atof(argv[8]);
+        env->arguments.rotation_angle_x = ft_atof(argv[4]);
+        env->arguments.rotation_angle_y = ft_atof(argv[6]);
+        env->arguments.rotation_angle_z = ft_atof(argv[8]);
     }
     else
         terminate(ERROR_USAGE);
@@ -63,15 +63,21 @@ void    parse_camera(t_env *env, int fd)
     char    *line;
 
     initialize_camera(env);
-    while (get_next_line(fd, &line) == 1 && )
+    while (get_next_line(fd, &line) == 1 && (ft_strstr(line, "}") == NULL))
     {
         if (ft_strstr(line, "origin") != NULL)
             env->camera.origin = parse_array(line);
         else if (ft_strstr(line, "rotation") != NULL)
-            // env->camera.;
+            env->camera.rotation_angle = parse_array(line);
         ft_strdel(&line);
     }
     ft_strdel(&line);
+    if (env->arguments.rotation_angle_x < INFINITY)
+        env->camera.rotation_angle.x = env->arguments.rotation_angle_x;
+    if (env->arguments.rotation_angle_y < INFINITY)
+        env->camera.rotation_angle.y = env->arguments.rotation_angle_y;
+    if (env->arguments.rotation_angle_z < INFINITY)
+        env->camera.rotation_angle.z = env->arguments.rotation_angle_z;
 }
 
 t_light *parse_light(int fd)
