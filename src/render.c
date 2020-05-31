@@ -12,6 +12,22 @@
 
 #include "rtv1.h"
 
+void    trace_reflection(t_env *env, t_object *object)
+{
+    if (env->trace_recursion_depth < env->camera.recursion_threshold)
+    {
+        env->ray.origin = env->ray.hit;
+        find_surface_normal(env, object);
+        env->ray.direction = \
+            reflect_vector_at_surface_noraml(env->ray.direction, \
+                                            object->surface_normal);
+        env->trace_recursion_depth++;
+        trace_draw(env);
+    }
+    else
+        env->trace_recursion_depth = 0;
+}
+
 void    trace_draw(t_env *env)
 {
     t_object    *object;
