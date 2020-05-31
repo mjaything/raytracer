@@ -12,6 +12,32 @@
 
 #include "rtv1.h"
 
+void    trace_draw(t_env *env)
+{
+    t_object    *object;
+    double      intersection;
+    double      nonnegative_min_intersection;
+    t_vector    position;
+    t_vector    anti_aliased_color;
+
+    nonnegative_min_intersection = INFINITY;
+    object = ray_object_intersection(env, &nonnegative_min_intersection, \
+                                    &intersection);
+    if (object != NULL && nonnegative_min_intersection != INFINITY)
+    {
+        position = multiply_vector_by_scalar(env->ray.direction, \
+                                            nonnegative_min_intersection);
+        trace_reflection(env, object);
+        trace_color(env, object, &nonnegative_min_intersection, &intersection);
+    }
+    else
+        env->color = create_vector(0.0, 0.0, 0.0);
+    anti_aliased_color = multiply_vector_by_scalar(env->color, \
+                                        1 / powf(env->camera.anti_aliasing, 2));
+    env->color_final = add_vector(env->color_final, anti_aliased_color);
+    clamp_vector(&env->color_final, 0, 1);
+}
+
 void    trace(t_env *env)
 {
     env->ray.y = 0;
