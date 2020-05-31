@@ -44,16 +44,6 @@ void    initialize_object(t_object *object)
     object->next = NULL;
 }
 
-void    initialize_camera(t_env *env)
-{
-    env->camera.origin = create_vector(0.0, 0.0, 0.0);
-    env->camera.direction = create_vector(0.0, 0.0, 1.0);
-    env->camera.rotation_angle = create_vector(0.0, 0.0, 0.0);
-    env->camera.field_of_view = 90.0;
-    env->camera.anti_aliasing = 4.0;
-    env->camera.recursion_threshold = 0;
-}
-
 void    initialize_material(t_material *material)
 {
     material->surface_color = create_vector(1.0, 1.0, 1.0);
@@ -72,4 +62,21 @@ void    initialize_image(t_env *env)
                                             &env->image.bits_per_pixel, \
                                             &env->image.size_line,
                                             &env->image.endian);
+}
+
+void    initialize_trace(t_env *env)
+{
+    t_vector    vector1;
+    t_vector    vector2;
+
+    env->trace_recursion_depth = 0.0;
+    env->ray.hit = create_vector(0.0, 0.0, 0.0);
+    env->ray.origin = env->camera.position;
+    env->direction = env->camera.origin;
+    vector1 = create_vector(env->camera.xi * env->i, 0.0, 0.0);
+    vector2 = create_vector(0.0, env->camera.yi * env->j, 0.0);
+    vector1 = subtract_vector(vector1, vector2);
+    env->ray.direction = add_vector(env->camera.origin, vector1);
+    rotate(&env->camera.origin, &env->camera.rotation_angle);
+    env->ray.direction = normalize(env->ray.direction);
 }
