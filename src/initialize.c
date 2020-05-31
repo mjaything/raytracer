@@ -32,6 +32,7 @@ void    initialize_light(t_light *light)
 {
     light->origin = create_vector(0.0, 0.0, 0.0);
     light->color = create_vector(0.0, 0.0, 0.0);
+    light->intensity = 1.0;
 }
 
 void    initialize_object(t_object *object)
@@ -46,10 +47,11 @@ void    initialize_object(t_object *object)
 void    initialize_camera(t_env *env)
 {
     env->camera.origin = create_vector(0.0, 0.0, 0.0);
-    env->camera.direction = create_vector(0.0, 0.0, );
-    env;
-    env->camera.anti_aliasing = 4; // 4.0?
-
+    env->camera.direction = create_vector(0.0, 0.0, 1.0);
+    env->camera.rotation_angle = create_vector(0.0, 0.0, 0.0);
+    env->camera.field_of_view = 90.0;
+    env->camera.anti_aliasing = 4.0;
+    env->camera.recursion_threshold = 0;
 }
 
 void    initialize_material(t_material *material)
