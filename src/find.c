@@ -33,3 +33,13 @@ void    find_surface_normal(t_env *env, t_object *object)
         object->surface_normal = normalize_vector(surface_normal);
     }
 }
+
+void    find_shadows(t_env *env, t_object *object, \
+                    double *nonnegative_min_intersection, double *intersection)
+{
+    env->shadow = 1.0;
+    *nonnegative_min_intersection = INFINITY;
+    if (ray_object_intersection(env, nonnegative_min_intersection, intersection) \
+        != object)
+        env->shadow = 0.5;
+}
