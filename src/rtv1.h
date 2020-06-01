@@ -16,17 +16,21 @@
 # include "../library/libft/libft.h"
 # include "../library/minilibx_macos/mlx.h"
 # include <math.h>
+# include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
-
 # define KEYBOARD_ESC 53
 # define EVENT_KEY_PRESS 2
 # define EVENT_MASK_KEY_PRESS 1L << 0
+
+# define WINDOW_WIDTH 1024
+# define WINDOW_HEIGHT 768
+
+# define POSITION_MAXIMUM 1000.0
+# define POSITION_MINIMUM -1000.0
 
 # define EPSILON 1e-9
 # define PI 3.1415926535
@@ -35,18 +39,13 @@
                         -z [angle]"
 # define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment initialization"
 # define ERROR_SCENE_FILE "ERROR: Check the scene file"
+# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing lights"
 # define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing objects"
+# define ERROR_MLX_INIT "ERROR: Check the process of initiating mlx"
 # define ERROR_MLX_NEW_IMAGE "ERROR: Check the process of creating new image"
+# define ERROR_MLX_NEW_WINDOW "ERROR: Check the process of creating new window"
 
 enum Shape { SPHERE, CONE, CYLINDER, PLANE };
-
-typedef struct      s_arguments
-{
-    char    *scene;
-    double  angle_x;
-    double  angle_y;
-    double  angle_z;
-}                   t_arguments;
 
 typedef struct      s_vector
 {
@@ -54,6 +53,14 @@ typedef struct      s_vector
     double y;
     double z;
 }                   t_vector;
+
+typedef struct      s_arguments
+{
+    char    *scene;
+    double  rotation_angle_x;
+    double  rotation_angle_y;
+    double  rotation_angle_z;
+}                   t_arguments;
 
 typedef struct      s_material
 {
@@ -75,6 +82,7 @@ typedef struct      s_light
 {
     t_vector    origin;
     t_vector    color;
+    double      intensity;
     struct s_light  *next;
 }                   t_light;
 
@@ -88,12 +96,6 @@ typedef struct      s_object
     double      scale;
     struct s_object *next;
 }                   t_object;
-
-typedef struct      s_intersection
-{
-    double      t;
-    t_object    object;
-}                   t_intersection;
 
 typedef struct      s_image
 {
@@ -114,11 +116,16 @@ typedef struct      s_window
 typedef struct      s_camera
 {
     t_vector    origin;
+    t_vector    position;
     t_vector    direction;
     t_vector    rotation_angle;
+    double      width;
+    double      height;
+    double      xi;
+    double      yi;
     double      field_of_view;
-    double      recursion_threshold;
     double      anti_aliasing;
+    double      recursion_threshold;
 }                   t_camera;
 
 typedef struct      s_env
@@ -127,24 +134,19 @@ typedef struct      s_env
     t_window        window;
     t_light         *light;
     t_object        *object;
-
     t_image         img_ptr;
     t_image         image;
     t_camera        camera;
     t_ray           ray;
-    
-
-
+    t_vector        color;
+    t_vector        color_intersection;
+    t_vector        color_final;
     void            *mlx_ptr;
-    
-    
-    
-    char            *data_addr;
-    
-
-    
-    
-    
+    double          i;
+    double          j;
+    int             trace_recursion_depth;
+    double          shadow;
+    double          (*intersection[6])(struct s_env *, t_object *);
 }                   t_env;
 
 #endif
