@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void    parse_arguments(t_env *env, int argc, char **argv)
+void    parse_arguments(t_env *env, char **argv)
 {   
     env->arguments.scene = ft_strdup(argv[1]);
     if (ft_strcmp(argv[3], "-x") == 0 && ft_strcmp(argv[5], "-y") == 0 && \
@@ -126,6 +126,7 @@ int         parse_shape(char *line)
 {
     int shape;
 
+    shape = 0;
     if (ft_strstr(line, "sphere") != NULL)
         shape = SPHERE;
     else if (ft_strstr(line, "cone") != NULL)
@@ -146,7 +147,7 @@ t_material  parse_material(int fd)
     while ((get_next_line(fd, &line) == 1) && (ft_strstr(line, "}") == NULL))
     {
         if (ft_strstr(line, "surface_color") != NULL)
-            material.color = parse_color(line);
+            material.surface_color = parse_color(line);
         else if (ft_strstr(line, "reflection_ambient") != NULL)
             material.reflection_ambient = parse_float(line);
         else if (ft_strstr(line, "reflection_diffuse") != NULL)
