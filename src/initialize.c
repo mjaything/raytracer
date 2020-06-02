@@ -26,6 +26,12 @@ void    initialize_environment(t_env *env)
     env->object->next = NULL;
     env->window.width = WINDOW_WIDTH;
     env->window.height = WINDOW_HEIGHT;
+    env->trace_recursion_depth = 0;
+    env->shadow = 1.0;
+    env->intersection[0] = ray_sphere_intersection;
+    env->intersection[1] = ray_cone_intersection;
+    env->intersection[2] = ray_cylinder_intersection;
+    env->intersection[3] = ray_plane_intersection;
 }
 
 void    initialize_light(t_light *light)
