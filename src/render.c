@@ -16,9 +16,9 @@ void    trace_color(t_env *env, t_object *object, \
                     double *nonnegative_min_intersection, double *intersection)
 {
     t_light     *light;
-    t_vector reflection_ambient;
-    t_vector reflection_diffuse;
-    t_vector reflection_specular;
+    t_vector    reflection_ambient;
+    t_vector    reflection_diffuse;
+    t_vector    reflection_specular;
 
     light = env->light;
     env->color = create_vector(0.0, 0.0, 0.0);
@@ -99,11 +99,11 @@ void    trace(t_env *env)
                 {
                     initialize_trace(env);
                     trace_draw(env);
-                    env->j += 1.0 / env->camera.anti_aliasing;
+                    env->j += 1 / env->camera.anti_aliasing;
                 }
-                env->i += 1.0 / env->camera.anti_aliasing;
+                env->i += 1 / env->camera.anti_aliasing;
             }
-            image_pixel_put(env, env->ray.x, env->ray.y, )
+            image_pixel_put(env, env->ray.x, env->ray.y, env->color_final);
             env->ray.x++;
         }
         env->ray.y++;
