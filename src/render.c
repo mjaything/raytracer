@@ -16,9 +16,9 @@ void    trace_color(t_env *env, t_object *object, \
                     double *nonnegative_min_intersection, double *intersection)
 {
     t_light     *light;
-    t_vector    reflection_ambient;
-    t_vector    reflection_diffuse;
-    t_vector    reflection_specular;
+    t_vector    ambient;
+    t_vector    diffuse;
+    t_vector    specular;
 
     light = env->light;
     env->color = create_vector(0.0, 0.0, 0.0);
@@ -27,15 +27,17 @@ void    trace_color(t_env *env, t_object *object, \
         configure_light_source(env, light);
         find_surface_normal(env, object);
         find_shadows(env, object, nonnegative_min_intersection, intersection);
-        reflection_ambient = \
-            multiply_vector_by_scalar(light->color, \
+        ambient = multiply_vector_by_scalar(light->color, \
                                         object->material.reflection_ambient);
-        reflection_diffuse = calculate_diffuse_contribution(env, object, light);
-        reflection_specular = calculate_specular_contribution(env, object, light);
-        env->color_intersection = add_vector(reflection_ambient, reflection_diffuse);
-        env->color_intersection = add_vector(env->color.intersection, reflection_specular);
-        env->color_intersection = multiply_vector_by_scalar(env->color_intersection, env->shadow);
-        env->color_intersection = multiply_vector_by_scalar(env->color_intersection, object->material.surface_color);
+        diffuse = calculate_diffuse_contribution(env, object, light);
+        specular = calculate_specular_contribution(env, object, light);
+        env->color_intersection = add_vector(ambient, diffuse);
+        env->color_intersection = add_vector(env->color_intersection, specular);
+        env->color_intersection = \
+            multiply_vector_by_scalar(env->color_intersection, env->shadow);
+        env->color_intersection = \
+            multiply_vector_by_scalar(env->color_intersection, \
+                                        object->material.surface_color);
         env->color = add_vector(env->color, env->color_intersection);
     }
 }
