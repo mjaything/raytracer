@@ -22,9 +22,10 @@ double  ray_cylinder_intersection(t_env *env, t_object *object)
 
     cylinder_to_ray_vector = subtract_vector(env->ray.origin, object->origin);
     a = ft_pow(env->ray.direction.x, 2) + ft_pow(env->ray.direction.z, 2);
-    b = 2 * env->ray.origin.x * env->ray.direction.x + \
-        2 * env->ray.origin.z * env->ray.direction.z;
-    c = ft_pow(env->ray.origin.x, 2) + ft_pow(env->ray.origin.z, 2) - \
+    b = 2 * cylinder_to_ray_vector.x * env->ray.direction.x + \
+        2 * cylinder_to_ray_vector.z * env->ray.direction.z;
+    c = ft_pow(cylinder_to_ray_vector.x, 2) + \
+        ft_pow(cylinder_to_ray_vector.z, 2) - \
         object->scale;
     discriminant = calculate_discriminant(a, b, c);
     if (discriminant < EPSILON)
