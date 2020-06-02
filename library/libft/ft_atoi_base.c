@@ -21,8 +21,10 @@ int		ft_atoi_base(char *str, int str_base)
     i = 0;
     number = 0;
     sign = 1;
-    sign = (str[i] == '-') ? -1 : 1;
-    (str[i] == '-' || str[i] == '+') ? i++ : 0;
+    if (str[i] == '-' && str_base == 10)
+        sign =  -1;
+    if (str[i] == '-' || str[i] == '+')
+        i++;
     while (i < ft_strlen(str))
     {
         if (str[i] >= '0' && str[i] <= '0' + str_base - 1)
