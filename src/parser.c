@@ -184,6 +184,7 @@ t_object    *parse_object(int fd)
         ft_strdel(&line);
     }
     ft_strdel(&line);
+    object->next = NULL;
     return object;
 }
 
