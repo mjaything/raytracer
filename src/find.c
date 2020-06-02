@@ -39,7 +39,8 @@ void    find_shadows(t_env *env, t_object *object, \
 {
     env->shadow = 1.0;
     *nonnegative_min_intersection = INFINITY;
-    if (ray_object_intersection(env, nonnegative_min_intersection, intersection) \
+    if (ray_object_intersection(env, \
+                                nonnegative_min_intersection, intersection) \
         != object)
         env->shadow = 0.5;
 }
