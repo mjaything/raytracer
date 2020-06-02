@@ -37,7 +37,7 @@ t_vector    parse_array(char *line)
     array_split = ft_strsplit(line, ' ');
     i = 0;
     j = 0;
-    while (array_split[i] != '\0' && j < 3)
+    while (array_split[i] != NULL && j < 3)
     {
         if (ft_hasdigit(array_split[i]))
             j++;
@@ -78,6 +78,27 @@ void    parse_camera(t_env *env, int fd)
         env->camera.rotation_angle.z = env->arguments.rotation_angle_z;
 }
 
+t_vector    parse_color(char *line)
+{
+    int         color_hex;
+    t_vector    color_rgb;
+
+    color_hex = ft_atoi_base(line, 16);
+    color_rgb = decompose_color(color_hex);
+    return color_rgb;
+}
+
+double      parse_float(char *line)
+{
+    char    *finder;
+    double  number;
+
+    finder = ft_strstr(line, ":");
+    finder += 2;
+    number = ft_atof(finder);
+    return number;
+}
+
 t_light *parse_light(int fd)
 {
     t_light *light;
@@ -94,6 +115,7 @@ t_light *parse_light(int fd)
             light->color = parse_color(line);
         else if (ft_strstr(line, "intensity") != NULL)
             light->intensity = parse_float(line);
+        ft_strdel(&line);
     }
     ft_strdel(&line);
     light->next = NULL;
@@ -113,16 +135,6 @@ int         parse_shape(char *line)
     else if (ft_strstr(line, "plane") != NULL)
         shape = PLANE;
     return shape;
-}
-
-t_vector    parse_color(char *line)
-{
-    int         color_hex;
-    t_vector    color_rgb;
-
-    color_hex = ft_atoi_base(line, 16);
-    color_rgb = decompose_color(color_hex);
-    return color_rgb;
 }
 
 t_material  parse_material(int fd)
@@ -147,17 +159,6 @@ t_material  parse_material(int fd)
     }
     ft_strdel(&line);
     return material;
-}
-
-double      parse_float(char *line)
-{
-    char    *finder;
-    double  number;
-
-    finder = ft_strstr(line, ":");
-    finder += 2;
-    number = ft_atof(finder);
-    return number;
 }
 
 t_object    *parse_object(int fd)
