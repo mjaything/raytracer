@@ -25,15 +25,17 @@ double	ft_atof(const char *str)
     n = 1;
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
-    sign = (str[i] == '-') ? -1 : 1;
-    str[i] == '-' || str[i] == '+' ? i++ : 0;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
-		number = number * 10 + str[i++] - '0';
+		number = number * 10 + (str[i++] - '0');
     if (str[i] == '.')
     {
         i++;
         while (str[i] >= '0' && str[i] <= '9')
             number += (str[i++] - '0') / (n *= 10);
     }
-	return (sign * number);
+	return sign * number;
 }
