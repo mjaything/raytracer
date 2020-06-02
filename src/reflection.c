@@ -32,7 +32,7 @@ t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
     light_surface_normal_angle_cosine = \
         dot_product(env->ray.direction, object->surface_normal)
     if (light_surface_normal_angle_cosine < 0)
-        light_surface_normal_angle_cosine = 0;
+        light_surface_normal_angle_cosine = 0.0;
     diffuse_contribution = multiply_vector_by_scalar(light->color, \
                                         object->material.reflection_diffuse * \
                                         light_surface_normal_angle_cosine);
@@ -45,16 +45,15 @@ t_vector    calculate_specular_contribution(t_env *env, t_object *object, \
     t_vector    light_vector;
     t_vector    eye_vector;
     t_vector    reflect_vector;
+    t_vector    specular_contribution;
     double      eye_surface_normal_angle_cosine;
     double      factor;
-    t_vector    specular_contribution;
 
     light_vector = normalize_vector(subtract_vector(light->origin, \
                                                     env->ray.hit));
-    eye_vector = normalize_vector(subtract_vector(env->camera.origin, \
+    eye_vector = normalize_vector(subtract_vector(env->camera.position, \
                                                     env->ray.hit));
-    reflect_vector = normalize_vector(subtract_vector(add_vector(light_vector, \
-                                                                eye_vector)));
+    reflect_vector = normalize_vector(add_vector(light_vector, eye_vector));
     eye_surface_normal_angle_cosine = \
         dot_product(object->surface_normal, reflect_vector);
     factor = pow(eye_surface_normal_angle_cosine, object->material.shininess);
