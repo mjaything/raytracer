@@ -17,12 +17,13 @@ void    initialize_environment(t_env *env)
     t_light     *light;
     t_object    *object;
 
-    if (!(light = (t_light *)malloc(sizeof(t_light))) ||
-        !(object = (t_object *)malloc(sizeof(t_object))))
+    if (!(light = (t_light *)malloc(sizeof(t_light))))
+        terminate(ERROR_ENVIRONMENT_INITIALIZATION);
+    if (!(object = (t_object *)malloc(sizeof(t_object))))
         terminate(ERROR_ENVIRONMENT_INITIALIZATION);
     env->light = light;
-    env->light->next = NULL;
     env->object = object;
+    env->light->next = NULL;
     env->object->next = NULL;
     env->window.width = WINDOW_WIDTH;
     env->window.height = WINDOW_HEIGHT;
@@ -47,7 +48,6 @@ void    initialize_object(t_object *object)
     object->origin = create_vector(0.0, 0.0, 0.0);
     object->direction = create_vector(0.0, 0.0, 0.0);
     object->scale = 1.0;
-    object->next = NULL;
 }
 
 void    initialize_material(t_material *material)
@@ -75,14 +75,14 @@ void    initialize_trace(t_env *env)
     t_vector    vector1;
     t_vector    vector2;
 
-    env->trace_recursion_depth = 0.0;
-    env->ray.hit = create_vector(0.0, 0.0, 0.0);
     env->ray.origin = env->camera.position;
-    env->direction = env->camera.origin;
+    env->ray.direction = env->camera.origin;
+    env->ray.hit = create_vector(0.0, 0.0, 0.0);
+    env->trace_recursion_depth = 0;
     vector1 = create_vector(env->camera.xi * env->i, 0.0, 0.0);
     vector2 = create_vector(0.0, env->camera.yi * env->j, 0.0);
     vector1 = subtract_vector(vector1, vector2);
     env->ray.direction = add_vector(env->camera.origin, vector1);
-    rotate(&env->camera.origin, &env->camera.rotation_angle);
-    env->ray.direction = normalize(env->ray.direction);
+    rotate(&env->ray.direction, env->camera.rotation_angle);
+    env->ray.direction = normalize_vector(env->ray.direction);
 }
