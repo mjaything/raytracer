@@ -59,10 +59,10 @@ void    trace_reflection(t_env *env, t_object *object)
 void    trace_draw(t_env *env)
 {
     t_object    *object;
-    double      intersection;
-    double      nonnegative_min_intersection;
     t_vector    position;
     t_vector    anti_aliased_color;
+    double      intersection;
+    double      nonnegative_min_intersection;
 
     nonnegative_min_intersection = INFINITY;
     object = ray_object_intersection(env, &nonnegative_min_intersection, \
@@ -71,6 +71,7 @@ void    trace_draw(t_env *env)
     {
         position = multiply_vector_by_scalar(env->ray.direction, \
                                             nonnegative_min_intersection);
+        env->ray.hit = add_vector(env->ray.origin, position);
         trace_reflection(env, object);
         trace_color(env, object, &nonnegative_min_intersection, &intersection);
     }
