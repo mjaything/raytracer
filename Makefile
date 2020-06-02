@@ -13,7 +13,7 @@
 NAME = rtv1
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -03
+FLAGS = -Wall -Werror -Wextra -O3
 LIBRARIES = -lmlx -lm -lft\
 			-L$(LIBFT_DIRECTORY) -L$(MINILIBX_DIRECTORY)\
 			-framework OpenGL -framework AppKit
