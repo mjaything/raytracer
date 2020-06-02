@@ -152,4 +152,68 @@ typedef struct      s_env
     double          (*intersection[6])(struct s_env *, t_object *);
 }                   t_env;
 
+void    initialize_camera(t_env *env);
+void    configure_camera(t_env *env);
+t_vector decompose_color(int color_hex);
+double  ray_cone_intersection(t_env *env, t_object *object);
+double  ray_cylinder_intersection(t_env *env, t_object *object);
+void    image_pixel_put(t_env *env, int x, int y, t_vector color_rgb);
+int     handle_expose_event(t_env *env);
+int     handle_no_event(t_env *env);
+void	handle_events(t_env *env);
+void    find_surface_normal(t_env *env, t_object *object);
+void    find_shadows(t_env *env, t_object *object, \
+                    double *nonnegative_min_intersection, double *intersection);
+void    initialize_environment(t_env *env);
+void    initialize_light(t_light *light);
+void    initialize_object(t_object *object);
+void    initialize_material(t_material *material);
+void    initialize_image(t_env *env);
+void    initialize_trace(t_env *env);
+double  degree_to_radian(double degrees);
+double  calculate_discriminant(double a, double b, double c);
+void    parse_arguments(t_env *env, int argc, char **argv);
+t_vector    parse_array(char *line);
+void    parse_camera(t_env *env, int fd);
+t_vector    parse_color(char *line);
+double      parse_float(char *line);
+t_light *parse_light(int fd);
+int         parse_shape(char *line);
+t_material  parse_material(int fd);
+t_object    *parse_object(int fd);
+void    parse_scene(t_env *env);
+double  ray_plane_intersection(t_env *env, t_object *object);
+void        configure_light_source(t_env *env, t_light *light);
+t_object    *ray_object_intersection(t_env *env, \
+                    double *nonnegative_min_intersection, double *intersection);
+t_vector    reflect_vector_at_surface_normal(t_vector input_vector, \
+                                                t_vector surface_normal);
+t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
+                                            t_light *light);
+t_vector    calculate_specular_contribution(t_env *env, t_object *object, \
+                                            t_light *light);
+void    trace_color(t_env *env, t_object *object, \
+                    double *nonnegative_min_intersection, double *intersection);
+void    trace_reflection(t_env *env, t_object *object);
+void    trace_draw(t_env *env);
+void    trace(t_env *env);
+void    render_scene(t_env *env);
+void        rotation_x_axis(t_vector *vector, double degree);
+void        rotation_y_axis(t_vector *vector, double degree);
+void        rotation_z_axis(t_vector *vector, double degree);
+void        rotate(t_vector *vector, t_vector rotation_angle);
+double  ray_sphere_intersection(t_env *env, t_object *object);
+void    terminate(char *str);
+int     press_keyboard(int keycode);
+void    display_loading(void);
+t_vector    create_vector(double x, double y, double z);
+t_vector     add_vector(t_vector vector1, t_vector vector2);
+t_vector     subtract_vector(t_vector vector1, t_vector vector2);
+t_vector     multiply_vector_by_scalar(t_vector vector, double c);
+double      calculate_magnitude(t_vector vector);
+t_vector    normalize_vector(t_vector vector);
+double      dot_product(t_vector vector1, t_vector vector2);
+t_vector    cross_product(t_vector vector1, t_vector vector2);
+void        clamp_vector(t_vector *vector, double min, double max);
+
 #endif
