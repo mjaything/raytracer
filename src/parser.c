@@ -14,12 +14,10 @@
 
 void    parse_arguments(t_env *env, int argc, char **argv)
 {   
-    // checking validity of file to be added here if needed
     env->arguments.scene = ft_strdup(argv[1]);
     if (ft_strcmp(argv[3], "-x") == 0 && ft_strcmp(argv[5], "-y") == 0 && \
         ft_strcmp(argv[7], "-z") == 0)
     {
-        // camera angle condition to be added here if needed
         env->arguments.rotation_angle_x = ft_atof(argv[4]);
         env->arguments.rotation_angle_y = ft_atof(argv[6]);
         env->arguments.rotation_angle_z = ft_atof(argv[8]);
@@ -197,20 +195,18 @@ void    parse_scene(t_env *env)
     
     if (!((fd = open(env->arguments.scene, O_RDWR)) > 0))
         terminate(ERROR_SCENE_FILE);
+    light = env->light;
+    object = env->object;
     while (get_next_line(fd, &line) == 1)
     {
         if (ft_strstr(line, "Camera") != NULL)
             parse_camera(env, fd);
-        else if (ft_strstr(line, "Lights") != NULL)
-        {
-            light->next = parse_light(fd);
+        else if ((ft_strstr(line, "Lights") != NULL) && \
+                    light->next = parse_light(fd))
             light = light->next;
-        }
-        else if (ft_strstr(line, "Objects") != NULL)
-        {
-            object->next = parse_object(fd);
+        else if ((ft_strstr(line, "Objects") != NULL) && \
+                    object->next = parse_object(fd))
             object = object->next;
-        }
         ft_strdel(&line);
     }
     ft_strdel(&line);
