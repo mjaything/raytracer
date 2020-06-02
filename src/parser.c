@@ -15,12 +15,12 @@
 void    parse_arguments(t_env *env, char **argv)
 {   
     env->arguments.scene = ft_strdup(argv[1]);
-    if (ft_strcmp(argv[3], "-x") == 0 && ft_strcmp(argv[5], "-y") == 0 && \
-        ft_strcmp(argv[7], "-z") == 0)
+    if (ft_strcmp(argv[2], "-x") == 0 && ft_strcmp(argv[4], "-y") == 0 && \
+        ft_strcmp(argv[6], "-z") == 0)
     {
-        env->arguments.rotation_angle_x = ft_atof(argv[4]);
-        env->arguments.rotation_angle_y = ft_atof(argv[6]);
-        env->arguments.rotation_angle_z = ft_atof(argv[8]);
+        env->arguments.rotation_angle_x = ft_atof(argv[3]);
+        env->arguments.rotation_angle_y = ft_atof(argv[5]);
+        env->arguments.rotation_angle_z = ft_atof(argv[7]);
     }
     else
         terminate(ERROR_USAGE);
@@ -63,8 +63,8 @@ void    parse_camera(t_env *env, int fd)
     initialize_camera(env);
     while (get_next_line(fd, &line) == 1 && (ft_strstr(line, "}") == NULL))
     {
-        if (ft_strstr(line, "origin") != NULL)
-            env->camera.origin = parse_array(line);
+        if (ft_strstr(line, "position") != NULL)
+            env->camera.position = parse_array(line);
         else if (ft_strstr(line, "rotation") != NULL)
             env->camera.rotation_angle = parse_array(line);
         ft_strdel(&line);

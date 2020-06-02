@@ -14,7 +14,7 @@
 
 void    initialize_camera(t_env *env)
 {
-    env->camera.origin = create_vector(0.0, 0.0, 0.0);
+    env->camera.position = create_vector(0.0, 0.0, 0.0);
     env->camera.direction = create_vector(0.0, 0.0, 1.0);
     env->camera.rotation_angle = create_vector(0.0, 0.0, 0.0);
     env->camera.field_of_view = 90.0;

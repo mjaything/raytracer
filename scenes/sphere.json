@@ -1,0 +1,66 @@
+{
+    "Camera":
+    {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0],
+        "field_of_view": 60
+    },
+    "Lights": [ {
+            "position": [0.0, -2.0, 0.0],
+            "color": "0xEA3546",
+            "intensity": 1.0
+        },{
+            "position": [0.0, 2.0, 0.0],
+            "color": "0xF9C80E",
+            "intensity": 1.0
+        }
+    ],
+    "Objects": [ {
+            "shape": "plane",
+            "direction": [-1.0, 0.0, 0.0],
+            "position": [5.0, 0.0, 0.0],
+            "scale": 5.0,
+            "material": {
+                    "color": "0x393E41",
+                    "ambient": 0.005,
+                    "diffuse": 0.995,
+                    "specular": 1.7,
+                    "shininess": 256
+                }
+        }, {
+            "shape": "plane",
+            "direction": [1.0, 0.0, 0.0],
+            "origin": [-5.0, 0.0, 0.0],
+            "scale": 5.0,
+            "material": {
+                "color": "0x393E41",
+                "ambient": 0.005,
+                "diffuse": 0.995,
+                "specular": 1.7,
+                "shininess": 256
+            }
+        }, {
+            "shape": "sphere",
+            "origin": [0.0, 0.0, 4.0],
+            "scale": 1.0,
+            "material": {
+                "color": "0x8E8DBE",
+                "ambient": 0.005,
+                "diffuse": 0.995,
+                "specular": 1.7,
+                "shininess": 256
+            }
+        }, {
+            "shape": "sphere",
+            "origin": [0.0, 0.0, -4.0],
+            "scale": 1.0,
+            "material": {
+                "color": "0x8E8DBE",
+                "ambient": 0.005,
+                "diffuse": 0.995,
+                "specular": 1.7,
+                "shininess": 256
+            }
+        }
+    ]
+}

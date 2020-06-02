@@ -1,0 +1,28 @@
+{
+    "Camera":
+    {
+        "origin": [0.0, 0.1, 0.0],
+        "field_of_view": 120
+    },
+    "Lights":
+    {
+        "origin": [0.0, 5.0, 5.0],
+        "color": "0xFFFFFF",
+        "intensity": 1.0
+    },
+    "Objects":
+    {
+        "shape": "cylinder",
+        "origin": [0.0, 1.0, 10.0],
+        "direction": [0.0, 0.0, 45.0],
+        "scale": 1.0,
+        "material":
+        {
+            "color": "0xFF0000",
+            "ambient": 0.075,
+            "diffuse": 0.925,
+            "specular": 50.0,
+            "shininess": 1024
+        }
+    }
+}

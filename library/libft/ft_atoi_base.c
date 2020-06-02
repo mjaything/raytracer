@@ -17,6 +17,7 @@ int		ft_atoi_base(char *str, int str_base)
     int i;
     int number;
     int sign;
+    int len;
 
     i = 0;
     number = 0;
@@ -25,7 +26,8 @@ int		ft_atoi_base(char *str, int str_base)
         sign =  -1;
     if (str[i] == '-' || str[i] == '+')
         i++;
-    while (i < ft_strlen(str))
+    len = ft_strlen(str);
+    while (i < len)
     {
         if (str[i] >= '0' && str[i] <= '0' + str_base - 1)
             number += (str[i] - '0') * \
