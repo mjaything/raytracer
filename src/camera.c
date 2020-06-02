@@ -26,14 +26,16 @@ void    configure_camera(t_env *env)
 {
     t_vector    vector1;
     t_vector    vector2;
-    double  half_field_of_view = \
-                    degree_to_radian(env->camera.field_of_view / 2.0);
+    double      half_field_of_view;
 
     env->camera.width = env->window.width / env->window.height;
-    env->camera.height = 1;
+    env->camera.height = env->window.height / env->window.height;
+    half_field_of_view = \
+                    degree_to_radian(env->camera.field_of_view / 2.0);
     env->camera.half_view = tan(half_field_of_view);
-    vector1 = create_vector(0.0, env->camera.height / 2.0, 0.0);
-    vector2 = multiply_vector_by_scalar(env->camera.direction, 1.0 / env->camera.half_view);
+    vector1 = multiply_vector_by_scalar(env->camera.direction, \
+                                        1.0 / env->camera.half_view);
+    vector2 = create_vector(0.0, env->camera.height / 2.0, 0.0);
     vector1 = add_vector(vector1, vector2);
     vector2 = create_vector(env->camera.width / 2.0, 0.0, 0.0);
     env->camera.origin = subtract_vector(vector1, vector2);
