@@ -76,6 +76,8 @@ typedef struct      s_ray
     t_vector    origin;
     t_vector    direction;
     t_vector    hit;
+    double      x;
+    double      y;
 }                   t_ray;
 
 typedef struct      s_light
@@ -124,6 +126,7 @@ typedef struct      s_camera
     double      xi;
     double      yi;
     double      field_of_view;
+    double      half_view;
     double      anti_aliasing;
     double      recursion_threshold;
 }                   t_camera;
