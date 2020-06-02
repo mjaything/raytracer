@@ -19,8 +19,8 @@ void        rotation_x_axis(t_vector *vector, double degree)
 
     radian = degree_to_radian(degree);
     rotated_vector.x = vector->x;
-    rotated_vector.y = vector->y * cos(radian) + vector->z * sin(radian);
-    rotated_vector.z = vector->y * -sin(radian) + vector->z * cos(radian);
+    rotated_vector.y = vector->y * cos(radian) - vector->z * sin(radian);
+    rotated_vector.z = vector->y * sin(radian) + vector->z * cos(radian);
     *vector = rotated_vector;
 }
 
@@ -30,7 +30,7 @@ void        rotation_y_axis(t_vector *vector, double degree)
     double      radian;
 
     radian = degree_to_radian(degree);
-    rotated_vector.x = vector->x * cos(radian) + vector->z * -sin(radian);
+    rotated_vector.x = vector->x * cos(radian) - vector->z * sin(radian);
     rotated_vector.y = vector->y;
     rotated_vector.z = vector->x * sin(radian) + vector->z * cos(radian);
     *vector = rotated_vector;
@@ -42,8 +42,8 @@ void        rotation_z_axis(t_vector *vector, double degree)
     double      radian;
 
     radian = degree_to_radian(degree);
-    rotated_vector.x = vector->x * cos(radian) + vector->y * sin(radian);
-    rotated_vector.y = vector->x * -sin(radian) + vector->y * cos(radian);
+    rotated_vector.x = vector->x * cos(radian) - vector->y * sin(radian);
+    rotated_vector.y = vector->x * sin(radian) + vector->y * cos(radian);
     rotated_vector.z = vector->z;
     *vector = rotated_vector;
 }
