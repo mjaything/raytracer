@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-kim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/29 02:55:27 by min-kim           #+#    #+#             */
-/*   Updated: 2020/04/29 02:55:34 by min-kim          ###   ########.fr       */
+/*   Created: 2020/05/22 20:12:14 by min-kim           #+#    #+#             */
+/*   Updated: 2020/05/22 20:12:16 by min-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int main(int argc, char **argv)
+double  degree_to_radian(double degrees)
 {
-    if (argc == 8)
-    {
-        t_env env;
+    double radian;
 
-        parse_arguments(&env, argv);
-        initialize_environment(&env);
-        parse_scene(&env);
-        configure_camera(&env);
-        render_scene(&env);
-        handle_events(&env);
-    }
-    else
-        terminate(ERROR_USAGE);
-    return 0;
+    radian = degrees * PI / 180;
+    return radian;
+}
+
+double  calculate_discriminant(double a, double b, double c)
+{
+    double discriminant;
+    
+    discriminant = b * b - 4 * a * c;
+    return discriminant;
 }

@@ -18,7 +18,7 @@ void    image_pixel_put(t_env *env, int x, int y, t_vector color_rgb)
 
     if (x >= 0 && x < env->window.width && y >=0 && y < env->window.height)
     {
-        i = (x * env->image.bits_per_pixel / 8) + (y * env->image.size_line);
+        i = (x * (env->image.bits_per_pixel / 8)) + (y * env->image.size_line);
         env->image.image_ptr[i] = color_rgb.z;
         env->image.image_ptr[++i] = color_rgb.y;
         env->image.image_ptr[++i] = color_rgb.x;

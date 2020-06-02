@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-kim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/29 02:55:27 by min-kim           #+#    #+#             */
-/*   Updated: 2020/04/29 02:55:34 by min-kim          ###   ########.fr       */
+/*   Created: 2020/05/08 02:57:35 by min-kim           #+#    #+#             */
+/*   Updated: 2020/05/08 02:57:37 by min-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int main(int argc, char **argv)
+void    terminate(char *str)
 {
-    if (argc == 8)
-    {
-        t_env env;
+    ft_putendl_fd(str, 2);
+    exit(1);
+}
 
-        parse_arguments(&env, argv);
-        initialize_environment(&env);
-        parse_scene(&env);
-        configure_camera(&env);
-        render_scene(&env);
-        handle_events(&env);
-    }
-    else
-        terminate(ERROR_USAGE);
+int     press_keyboard(int keycode)
+{
+    if (keycode == KEYBOARD_ESC)
+        exit(0);
     return 0;
+}
+
+void    display_loading(void)
+{
+    ft_putendl("Loading... This may take up to several minutes.");
 }

@@ -35,8 +35,7 @@ void    trace_color(t_env *env, t_object *object, \
         env->color_intersection = add_vector(env->color_intersection, specular);
         env->color_intersection = \
             multiply_vector_by_scalar(env->color_intersection, env->shadow);
-        env->color_intersection = \
-            multiply_vector_by_scalar(env->color_intersection, \
+        env->color_intersection = hadamard_product(env->color_intersection, \
                                         object->material.surface_color);
         env->color = add_vector(env->color, env->color_intersection);
     }
@@ -49,7 +48,7 @@ void    trace_reflection(t_env *env, t_object *object)
         env->ray.origin = env->ray.hit;
         find_surface_normal(env, object);
         env->ray.direction = \
-            reflect_vector_at_surface_noraml(env->ray.direction, \
+            reflect_vector_at_surface_normal(env->ray.direction, \
                                             object->surface_normal);
         env->trace_recursion_depth++;
         trace_draw(env);
@@ -119,7 +118,7 @@ void    render_scene(t_env *env)
         terminate(ERROR_MLX_INIT);
     if (!(env->window.address = \
         mlx_new_window(env->mlx_ptr, env->window.width, env->window.height, \
-                        env->arguments.scene)));
+                        env->arguments.scene)))
         terminate(ERROR_MLX_INIT);
     initialize_image(env);
     display_loading();

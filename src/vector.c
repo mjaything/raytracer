@@ -42,16 +42,6 @@ t_vector     subtract_vector(t_vector vector1, t_vector vector2)
     return subtracted_vector;
 }
 
-t_vector     negate_vector(t_vector vector)
-{
-    t_vector negated_vector;
-
-    negated_vector.x = -vector.x;
-    negated_vector.y = -vector.y;
-    negated_vector.z = -vector.z;
-    return negated_vector;
-}
-
 t_vector     multiply_vector_by_scalar(t_vector vector, double c)
 {
     t_vector    multiplied_vector;
@@ -60,16 +50,6 @@ t_vector     multiply_vector_by_scalar(t_vector vector, double c)
     multiplied_vector.y = c * vector.y;
     multiplied_vector.z = c * vector.z;
     return multiplied_vector;
-}
-
-t_vector     divide_vector_by_scalar(t_vector vector, double c)
-{
-    t_vector divided_vector;
-
-    divided_vector.x = vector.x / c;
-    divided_vector.y = vector.y / c;
-    divided_vector.z = vector.z / c;
-    return divided_vector;
 }
 
 double      calculate_magnitude(t_vector vector)
@@ -109,6 +89,16 @@ t_vector    cross_product(t_vector vector1, t_vector vector2)
     resultant_vector.x = vector1.y * vector2.z - vector2.y * vector1.z;
     resultant_vector.y = vector1.z * vector2.x - vector2.z * vector1.x;
     resultant_vector.z = vector1.x * vector2.y - vector2.x * vector1.y;
+    return resultant_vector;
+}
+
+t_vector    hadamard_product(t_vector vector1, t_vector vector2)
+{
+    t_vector resultant_vector;
+
+    resultant_vector.x = vector1.x * vector2.x;
+    resultant_vector.y = vector1.y * vector2.y;
+    resultant_vector.z = vector1.z * vector2.z;
     return resultant_vector;
 }
 

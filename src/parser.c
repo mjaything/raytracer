@@ -205,10 +205,10 @@ void    parse_scene(t_env *env)
         if (ft_strstr(line, "Camera") != NULL)
             parse_camera(env, fd);
         else if ((ft_strstr(line, "Lights") != NULL) && \
-                    light->next = parse_light(fd))
+                    (light->next = parse_light(fd)))
             light = light->next;
         else if ((ft_strstr(line, "Objects") != NULL) && \
-                    object->next = parse_object(fd))
+                    (object->next = parse_object(fd)))
             object = object->next;
         ft_strdel(&line);
     }

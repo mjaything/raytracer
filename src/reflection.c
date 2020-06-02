@@ -30,7 +30,7 @@ t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
     t_vector    diffuse_contribution;
 
     light_surface_normal_angle_cosine = \
-        dot_product(env->ray.direction, object->surface_normal)
+        dot_product(env->ray.direction, object->surface_normal);
     if (light_surface_normal_angle_cosine < 0)
         light_surface_normal_angle_cosine = 0.0;
     diffuse_contribution = multiply_vector_by_scalar(light->color, \

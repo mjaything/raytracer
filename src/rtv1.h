@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # define KEYBOARD_ESC 53
 # define EVENT_KEY_PRESS 2
@@ -172,7 +173,7 @@ void    initialize_image(t_env *env);
 void    initialize_trace(t_env *env);
 double  degree_to_radian(double degrees);
 double  calculate_discriminant(double a, double b, double c);
-void    parse_arguments(t_env *env, int argc, char **argv);
+void    parse_arguments(t_env *env, char **argv);
 t_vector    parse_array(char *line);
 void    parse_camera(t_env *env, int fd);
 t_vector    parse_color(char *line);
@@ -214,6 +215,7 @@ double      calculate_magnitude(t_vector vector);
 t_vector    normalize_vector(t_vector vector);
 double      dot_product(t_vector vector1, t_vector vector2);
 t_vector    cross_product(t_vector vector1, t_vector vector2);
+t_vector    hadamard_product(t_vector vector1, t_vector vector2);
 void        clamp_vector(t_vector *vector, double min, double max);
 
 #endif
