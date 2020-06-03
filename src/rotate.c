@@ -48,7 +48,7 @@ void        rotation_z_axis(t_vector *vector, double degree)
     *vector = rotated_vector;
 }
 
-void        rotate(t_vector *vector, t_vector rotation_angle)
+void        rotate_vector(t_vector *vector, t_vector rotation_angle)
 {
     rotation_x_axis(vector, rotation_angle.x);
     rotation_y_axis(vector, rotation_angle.y);

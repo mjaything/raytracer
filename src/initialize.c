@@ -22,17 +22,19 @@ void    initialize_environment(t_env *env)
     if (!(object = (t_object *)malloc(sizeof(t_object))))
         terminate(ERROR_ENVIRONMENT_INITIALIZATION);
     env->light = light;
-    env->object = object;
     env->light->next = NULL;
+    env->object = object;
     env->object->next = NULL;
     env->window.width = WINDOW_WIDTH;
     env->window.height = WINDOW_HEIGHT;
+    env->window.dwidth = WINDOW_WIDTH / 2;
+    env->window.dheight = WINDOW_HEIGHT / 2;
     env->trace_recursion_depth = 0;
     env->shadow = 1.0;
-    env->intersection[0] = ray_sphere_intersection;
-    env->intersection[1] = ray_cone_intersection;
-    env->intersection[2] = ray_cylinder_intersection;
-    env->intersection[3] = ray_plane_intersection;
+    env->intersections[0] = ray_sphere_intersection;
+    env->intersections[1] = ray_cone_intersection;
+    env->intersections[2] = ray_cylinder_intersection;
+    env->intersections[3] = ray_plane_intersection;
 }
 
 void    initialize_light(t_light *light)
@@ -40,6 +42,9 @@ void    initialize_light(t_light *light)
     light->origin = create_vector(0.0, 0.0, 0.0);
     light->color = create_vector(0.0, 0.0, 0.0);
     light->intensity = 1.0;
+    light->constant = 1.0;
+    light->linear = 0.0014;
+    light->quadratic = 0.000007;
 }
 
 void    initialize_object(t_object *object)
@@ -72,17 +77,22 @@ void    initialize_image(t_env *env)
 
 void    initialize_trace(t_env *env)
 {
+    /*
     t_vector    vector1;
     t_vector    vector2;
+    */
 
     env->ray.origin = env->camera.position;
     env->ray.direction = env->camera.origin;
     env->ray.hit = create_vector(0.0, 0.0, 0.0);
     env->trace_recursion_depth = 0;
+    /*
     vector1 = create_vector(env->camera.xi * env->i, 0.0, 0.0);
     vector2 = create_vector(0.0, env->camera.yi * env->j, 0.0);
     vector1 = subtract_vector(vector1, vector2);
     env->ray.direction = add_vector(env->camera.origin, vector1);
-    rotate(&env->ray.direction, env->camera.rotation_angle);
+    */
+    env->ray.direction = add_vector(env->camera.origin, subtract_vector(multiply_vector_by_scalar(create_vector(1, 0, 0), env->camera.xi * env->i), multiply_vector_by_scalar(create_vector(0, 1, 0), env->camera.yi * env->j)));
+    rotate_vector(&env->ray.direction, env->camera.rotation_angle);
     env->ray.direction = normalize_vector(env->ray.direction);
 }

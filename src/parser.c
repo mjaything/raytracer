@@ -15,8 +15,8 @@
 void    parse_arguments(t_env *env, char **argv)
 {   
     env->arguments.scene = ft_strdup(argv[1]);
-    if (ft_strcmp(argv[2], "-x") == 0 && ft_strcmp(argv[4], "-y") == 0 && \
-        ft_strcmp(argv[6], "-z") == 0)
+    if (!(ft_strcmp(argv[2], "-x")) && !(ft_strcmp(argv[4], "-y")) && \
+        !(ft_strcmp(argv[6], "-z")))
     {
         env->arguments.rotation_angle_x = ft_atof(argv[3]);
         env->arguments.rotation_angle_y = ft_atof(argv[5]);
@@ -61,7 +61,7 @@ void    parse_camera(t_env *env, int fd)
     char    *line;
 
     initialize_camera(env);
-    while (get_next_line(fd, &line) == 1 && (ft_strstr(line, "}") == NULL))
+    while (get_next_line(fd, &line) == 1 && ((ft_strstr(line, "}") == NULL)))
     {
         if (ft_strstr(line, "position") != NULL)
             env->camera.position = parse_array(line);
@@ -70,12 +70,9 @@ void    parse_camera(t_env *env, int fd)
         ft_strdel(&line);
     }
     ft_strdel(&line);
-    if (env->arguments.rotation_angle_x < INFINITY)
-        env->camera.rotation_angle.x = env->arguments.rotation_angle_x;
-    if (env->arguments.rotation_angle_y < INFINITY)
-        env->camera.rotation_angle.y = env->arguments.rotation_angle_y;
-    if (env->arguments.rotation_angle_z < INFINITY)
-        env->camera.rotation_angle.z = env->arguments.rotation_angle_z;
+    env->camera.rotation_angle.x = env->arguments.rotation_angle_x;
+    env->camera.rotation_angle.y = env->arguments.rotation_angle_y;
+    env->camera.rotation_angle.z = env->arguments.rotation_angle_z;
 }
 
 t_vector    parse_color(char *line)
@@ -93,8 +90,7 @@ double      parse_float(char *line)
     char    *finder;
     double  number;
 
-    finder = ft_strstr(line, ":");
-    finder += 2;
+    finder = ft_strstr(line, ":") + 1;
     number = ft_atof(finder);
     return number;
 }
@@ -104,7 +100,7 @@ t_light *parse_light(int fd)
     t_light *light;
     char    *line;
 
-    if (!(light = (t_light *)ft_memalloc(sizeof(t_light))))
+    if (!(light = (t_light *)malloc(sizeof(t_light))))
         terminate(ERROR_LIGHT_MEMALLOC);
     initialize_light(light);
     while (get_next_line(fd, &line) == 1 && (ft_strstr(line, "}") == NULL))
@@ -115,6 +111,10 @@ t_light *parse_light(int fd)
             light->color = parse_color(line);
         else if (ft_strstr(line, "intensity") != NULL)
             light->intensity = parse_float(line);
+        else if (ft_strstr(line, "linear") != NULL)
+            light->linear = parse_float(line);
+        else if (ft_strstr(line, "quadratic") != NULL)
+            light->quadratic = parse_float(line);
         ft_strdel(&line);
     }
     ft_strdel(&line);
@@ -126,7 +126,7 @@ int         parse_shape(char *line)
 {
     int shape;
 
-    shape = 0;
+    shape = SPHERE;
     if (ft_strstr(line, "sphere") != NULL)
         shape = SPHERE;
     else if (ft_strstr(line, "cone") != NULL)
@@ -140,7 +140,7 @@ int         parse_shape(char *line)
 
 t_material  parse_material(int fd)
 {
-    t_material material;
+    t_material  material;
     char        *line;
 
     initialize_material(&material);
@@ -167,7 +167,7 @@ t_object    *parse_object(int fd)
     t_object    *object;
     char        *line;
 
-    if (!(object = (t_object *)ft_memalloc(sizeof(t_object))))
+    if (!(object = (t_object *)malloc(sizeof(t_object))))
         terminate(ERROR_OBJECT_MEMALLOC);
     initialize_object(object);
     while ((get_next_line(fd, &line) == 1) && (ft_strstr(line, "}") == NULL))
@@ -205,10 +205,10 @@ void    parse_scene(t_env *env)
         if (ft_strstr(line, "Camera") != NULL)
             parse_camera(env, fd);
         else if ((ft_strstr(line, "Lights") != NULL) && \
-                    (light->next = parse_light(fd)))
+                (light->next = parse_light(fd)))
             light = light->next;
         else if ((ft_strstr(line, "Objects") != NULL) && \
-                    (object->next = parse_object(fd)))
+                (object->next = parse_object(fd)))
             object = object->next;
         ft_strdel(&line);
     }

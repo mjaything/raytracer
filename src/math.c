@@ -24,6 +24,6 @@ double  calculate_discriminant(double a, double b, double c)
 {
     double discriminant;
     
-    discriminant = b * b - 4 * a * c;
+    discriminant = b * b - a * c;
     return discriminant;
 }

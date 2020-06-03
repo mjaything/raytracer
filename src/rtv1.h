@@ -15,13 +15,14 @@
 
 # include "../library/libft/libft.h"
 # include "../library/minilibx_macos/mlx.h"
-# include <math.h>
-# include <stdio.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <math.h>
+# include <time.h>
+# include <stdio.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <unistd.h>
 
 # define KEYBOARD_ESC 53
 # define EVENT_KEY_PRESS 2
@@ -77,26 +78,30 @@ typedef struct      s_ray
     t_vector    origin;
     t_vector    direction;
     t_vector    hit;
-    double      x;
-    double      y;
+    int         x;
+    int         y;
 }                   t_ray;
 
 typedef struct      s_light
 {
-    t_vector    origin;
-    t_vector    color;
-    double      intensity;
+    t_vector        origin;
+    t_vector        color;
+    double          intensity;
+    double          constant;
+    double          linear;
+    double          quadratic;
+    double          attenuation;
     struct s_light  *next;
 }                   t_light;
 
 typedef struct      s_object
 {
-    t_vector    origin;
-    t_vector    direction;
-    t_vector    surface_normal;
-    t_material  material;
-    int         shape;
-    double      scale;
+    t_vector        origin;
+    t_vector        direction;
+    t_vector        surface_normal;
+    t_material      material;
+    short           shape;
+    double          scale;
     struct s_object *next;
 }                   t_object;
 
@@ -114,6 +119,8 @@ typedef struct      s_window
     void    *address;
     int     width;
     int     height;
+    int     dwidth;
+    int     dheight;
 }                   t_window;
 
 typedef struct      s_camera
@@ -138,19 +145,18 @@ typedef struct      s_env
     t_window        window;
     t_light         *light;
     t_object        *object;
-    t_image         img_ptr;
     t_image         image;
     t_camera        camera;
     t_ray           ray;
     t_vector        color;
     t_vector        color_intersection;
     t_vector        color_final;
+    double          (*intersections[6])(struct s_env *, t_object *);
     void            *mlx_ptr;
-    double          i;
-    double          j;
     int             trace_recursion_depth;
     double          shadow;
-    double          (*intersection[6])(struct s_env *, t_object *);
+    double          i;
+    double          j;
 }                   t_env;
 
 void    initialize_camera(t_env *env);
@@ -202,7 +208,7 @@ void    render_scene(t_env *env);
 void        rotation_x_axis(t_vector *vector, double degree);
 void        rotation_y_axis(t_vector *vector, double degree);
 void        rotation_z_axis(t_vector *vector, double degree);
-void        rotate(t_vector *vector, t_vector rotation_angle);
+void        rotate_vector(t_vector *vector, t_vector rotation_angle);
 double  ray_sphere_intersection(t_env *env, t_object *object);
 void    terminate(char *str);
 int     press_keyboard(int keycode);

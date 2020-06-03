@@ -17,9 +17,9 @@ t_vector    reflect_vector_at_surface_normal(t_vector input_vector, \
 {
     t_vector    reflection_vector;
 
-    reflection_vector = subtract_vector(input_vector, \
+    reflection_vector = add_vector(input_vector, \
                         multiply_vector_by_scalar(surface_normal, \
-                        2 * dot_product(input_vector, surface_normal)));
+                        -2.0 * dot_product(input_vector, surface_normal)));
     return reflection_vector;
 }
 
@@ -47,7 +47,7 @@ t_vector    calculate_specular_contribution(t_env *env, t_object *object, \
     t_vector    reflect_vector;
     t_vector    specular_contribution;
     double      eye_surface_normal_angle_cosine;
-    double      factor;
+    float       factor;
 
     light_vector = normalize_vector(subtract_vector(light->origin, \
                                                     env->ray.hit));
