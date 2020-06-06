@@ -18,14 +18,23 @@ void    terminate(char *str)
     exit(1);
 }
 
-int     press_keyboard(int keycode)
-{
-    if (keycode == KEYBOARD_ESC)
-        exit(0);
-    return 0;
-}
-
 void    display_loading(void)
 {
     ft_putendl("Loading... This may take up to several minutes.");
+}
+
+void        clamp_vector(t_vector *vector, double min, double max)
+{
+    if (vector->x < min)
+        vector->x = min;
+    if (vector->x > max)
+        vector->x = max;
+    if (vector->y < min)
+        vector->y = min;
+    if (vector->y > max)
+        vector->y = max;
+    if (vector->z < min)
+        vector->z = min;
+    if (vector->z > max)
+        vector->z = max;
 }
