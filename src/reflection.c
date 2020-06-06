@@ -47,7 +47,6 @@ t_vector	calculate_specular_contribution(t_env *env, t_object *object, \
 	t_vector	reflect_vector;
 	t_vector	specular_contribution;
 	double		eye_surface_normal_angle_cosine;
-	float		factor;
 
 	light_vector = normalize_vector(subtract_vector(light->origin, \
 													env->ray.hit));
@@ -56,9 +55,9 @@ t_vector	calculate_specular_contribution(t_env *env, t_object *object, \
 	reflect_vector = normalize_vector(add_vector(light_vector, eye_vector));
 	eye_surface_normal_angle_cosine = \
 		dot_product(object->surface_normal, reflect_vector);
-	factor = pow(eye_surface_normal_angle_cosine, object->material.shininess);
 	specular_contribution = multiply_vector_by_scalar(light->color, \
-										object->material.reflection_specular * \
-										factor);
+							object->material.reflection_specular * \
+							pow(eye_surface_normal_angle_cosine, \
+								object->material.shininess));
 	return (specular_contribution);
 }
