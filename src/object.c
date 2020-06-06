@@ -33,8 +33,7 @@ t_vector	parse_array(char *line)
 			vector.y = ft_atof(array_split[i]);
 		else if (j == 3)
 			vector.z = ft_atof(array_split[i]);
-		ft_strdel(&array_split[i]);
-		i++;
+		ft_strdel(&array_split[i++]);
 	}
 	ft_strdel(&array_split[i]);
 	free(array_split);

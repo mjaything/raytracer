@@ -34,7 +34,7 @@ t_vector	add_vector(t_vector vector1, t_vector vector2)
 
 t_vector	subtract_vector(t_vector vector1, t_vector vector2)
 {
-	t_vector 	subtracted_vector;
+	t_vector	subtracted_vector;
 
 	subtracted_vector.x = vector1.x - vector2.x;
 	subtracted_vector.y = vector1.y - vector2.y;
