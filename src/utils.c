@@ -18,7 +18,7 @@ void	terminate(char *str)
 	exit(1);
 }
 
-void    display_loading(void)
+void	display_loading(void)
 {
 	ft_putendl("Loading... This may take up to several minutes.");
 }
