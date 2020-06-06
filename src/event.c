@@ -34,7 +34,7 @@ int		press_keyboard(int keycode)
 
 void	handle_events(t_env *env)
 {
-	mlx_hook(env->window.address, EVENT_KEY_PRESS, EVENT_MASK_KEY_PRESS, \
+	mlx_hook(env->window.address, EVENT_KEY_PRESS, 1L << 0, \
 			press_keyboard, env);
 	mlx_expose_hook(env->window.address, handle_expose_event, env);
 	mlx_loop_hook(env->mlx_ptr, handle_no_event, env);
