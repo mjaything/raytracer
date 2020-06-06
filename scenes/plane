@@ -1,0 +1,33 @@
+{
+    "Camera":
+    {
+        "position": [ 0, 5, 5 ]
+    }
+    "Lights":
+    {
+        "origin": [ -10, 10, -15 ]
+        "color": 0xF1F1F1
+        "intensity": 1.0
+    }
+    "Lights":
+    {
+        "origin": [ -10, -10, -15 ]
+        "color": 0xE7DECC
+        "intensity": 0.5
+    }
+    "Objects":
+    {
+        "shape": "plane"
+        "origin": [ 0, -1, 0 ]
+        "direction": [ 0, 1, 0 ]
+        "scale": 1.0
+        "material": 
+        {
+            "color": 0xDB110C
+            "reflection_ambient": 0.15
+            "reflection_diffuse": 0.995
+            "reflection_specular": 1.0
+            "shininess": 200
+        }
+    }
+}

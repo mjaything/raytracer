@@ -34,23 +34,23 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 SOURCES_DIRECTORY = ./src/
 SOURCES_LIST = camera.c \
 				color.c \
-				cone.c \
-				cylinder.c \
-				draw.c \
 				event.c \
 				find.c \
-				initialize.c \
+				image.c \
+				intersection.c \
+				light.c \
 				main.c \
+				material.c \
 				math.c \
-				parser.c \
-				plane.c \
-				ray.c \
+				object.c \
 				reflection.c \
-				render.c \
 				rotate.c \
-				sphere.c \
+				scene.c \
+				trace.c \
 				utils.c \
-				vector.c
+				vector_normalization.c \
+				vector_operation.c \
+				vector_product.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objects/

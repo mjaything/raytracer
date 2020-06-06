@@ -43,12 +43,11 @@ void    initialize_environment(t_env *env)
     env->window.height = WINDOW_HEIGHT;
     env->window.dwidth = WINDOW_WIDTH / 2;
     env->window.dheight = WINDOW_HEIGHT / 2;
-    env->trace_recursion_depth = 0;
-    env->shadow = 1.0;
     env->intersections[0] = ray_sphere_intersection;
     env->intersections[1] = ray_cone_intersection;
     env->intersections[2] = ray_cylinder_intersection;
     env->intersections[3] = ray_plane_intersection;
+    env->shadow = 1.0;
 }
 
 int main(int argc, char **argv)

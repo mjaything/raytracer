@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: min-kim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,9 +16,6 @@ void    trace_color(t_env *env, t_object *object, \
                     double *nonnegative_min_intersection, double *intersection)
 {
     t_light     *light;
-    t_vector    ambient;
-    t_vector    diffuse;
-    t_vector    specular;
 
     light = env->light;
     env->color = create_vector(0.0, 0.0, 0.0);
@@ -27,36 +24,21 @@ void    trace_color(t_env *env, t_object *object, \
         configure_light_source(env, light);
         find_surface_normal(env, object);
         find_shadows(env, object, nonnegative_min_intersection, intersection);
-        light->attenuation = 1.0 / (light->constant + light->linear * *nonnegative_min_intersection + light->quadratic * (*nonnegative_min_intersection * *nonnegative_min_intersection));
-        ambient = multiply_vector_by_scalar(light->color, \
-                                        object->material.reflection_ambient);
-        diffuse = calculate_diffuse_contribution(env, object, light);
-        specular = calculate_specular_contribution(env, object, light);
-        env->color_intersection = add_vector(ambient, diffuse);
-        env->color_intersection = add_vector(env->color_intersection, specular);
-        env->color_intersection = multiply_vector_by_scalar(env->color_intersection, light->attenuation);
+        light->attenuation = 1.0 / (light->constant + light->linear * \
+            *nonnegative_min_intersection + light->quadratic * \
+            (*nonnegative_min_intersection * *nonnegative_min_intersection));
+        env->color_intersection = add_vector(multiply_vector_by_scalar\
+            (light->color, object->material.reflection_ambient), \
+            add_vector(calculate_diffuse_contribution(env, object, light), \
+            calculate_specular_contribution(env, object, light)));
+        env->color_intersection = multiply_vector_by_scalar\
+                                (env->color_intersection, light->attenuation);
         env->color_intersection = \
             multiply_vector_by_scalar(env->color_intersection, env->shadow);
         env->color_intersection = hadamard_product(env->color_intersection, \
                                         object->material.surface_color);
         env->color = add_vector(env->color, env->color_intersection);
     }
-}
-
-void    trace_reflection(t_env *env, t_object *object)
-{
-    if (env->trace_recursion_depth < env->camera.recursion_threshold)
-    {
-        env->ray.origin = env->ray.hit;
-        find_surface_normal(env, object);
-        env->ray.direction = \
-            reflect_vector_at_surface_normal(env->ray.direction, \
-                                            object->surface_normal);
-        env->trace_recursion_depth++;
-        trace_draw(env);
-    }
-    else
-        env->trace_recursion_depth = 0;
 }
 
 void    trace_draw(t_env *env)
@@ -75,7 +57,6 @@ void    trace_draw(t_env *env)
         position = multiply_vector_by_scalar(env->ray.direction, \
                                             nonnegative_min_intersection);
         env->ray.hit = add_vector(env->ray.origin, position);
-        trace_reflection(env, object);
         trace_color(env, object, &nonnegative_min_intersection, &intersection);
     }
     else
@@ -86,13 +67,30 @@ void    trace_draw(t_env *env)
     clamp_vector(&env->color_final, 0, 1);
 }
 
+void    initialize_trace(t_env *env)
+{
+
+    t_vector    vector1;
+    t_vector    vector2;
+    
+    env->ray.origin = env->camera.position;
+    env->ray.direction = env->camera.origin;
+    env->ray.hit = create_vector(0.0, 0.0, 0.0);
+    vector1 = create_vector(env->camera.xi * env->i, 0.0, 0.0);
+    vector2 = create_vector(0.0, env->camera.yi * env->j, 0.0);
+    vector1 = subtract_vector(vector1, vector2);
+    env->ray.direction = add_vector(env->camera.origin, vector1);
+    rotate_vector(&env->ray.direction, env->camera.rotation_angle);
+    env->ray.direction = normalize_vector(env->ray.direction);
+}
+
 void    trace(t_env *env)
 {
     env->ray.y = 0;
-    while (env->ray.y < env->window.height)
+    while (env->ray.y < WINDOW_HEIGHT)
     {
         env->ray.x = 0;
-        while (env->ray.x < env->window.width)
+        while (env->ray.x < WINDOW_WIDTH)
         {
             env->color_final = create_vector(0.0, 0.0, 0.0);
             env->i = env->ray.x;
@@ -112,17 +110,4 @@ void    trace(t_env *env)
         }
         env->ray.y++;
     }
-}
-
-void    render_scene(t_env *env)
-{
-    if (!(env->mlx_ptr = mlx_init()))
-        terminate(ERROR_MLX_INIT);
-    if (!(env->window.address = \
-        mlx_new_window(env->mlx_ptr, env->window.width, env->window.height, \
-                        env->arguments.scene)))
-        terminate(ERROR_MLX_INIT);
-    initialize_image(env);
-    display_loading();
-    trace(env);
 }

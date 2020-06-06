@@ -31,7 +31,7 @@ t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
 
     light_surface_normal_angle_cosine = \
         dot_product(env->ray.direction, object->surface_normal);
-    if (light_surface_normal_angle_cosine < 0)
+    if (light_surface_normal_angle_cosine < 0.0)
         light_surface_normal_angle_cosine = 0.0;
     diffuse_contribution = multiply_vector_by_scalar(light->color, \
                                         object->material.reflection_diffuse * \
