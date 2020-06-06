@@ -26,7 +26,6 @@
 
 # define KEYBOARD_ESC 53
 # define EVENT_KEY_PRESS 2
-# define EVENT_MASK_KEY_PRESS 1L << 0
 
 # define WINDOW_WIDTH 500
 # define WINDOW_HEIGHT 500
@@ -37,20 +36,16 @@
 # define EPSILON 1e-9
 # define PI 3.1415926
 
-# define ERROR_USAGE    "ERROR: Usage: ./rtv1 scene_file -x [angle] \
-                        -y [angle] -z [angle]"
-# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment \
-                                            initialization"
+# define ERROR_USAGE    "ERROR: Usage: ./rtv1 scene_file -x [angle] -y [angle] -z [angle]"
+# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment initialization"
 # define ERROR_SCENE_FILE "ERROR: Check the scene file"
-# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing \
-                                lights"
-# define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing \
-                                objects"
+# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing lights"
+# define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing objects"
 # define ERROR_MLX_INIT "ERROR: Check the process of initiating mlx"
 # define ERROR_MLX_NEW_IMAGE "ERROR: Check the process of creating new image"
 # define ERROR_MLX_NEW_WINDOW "ERROR: Check the process of creating new window"
 
-enum Shape { SPHERE, CONE, CYLINDER, PLANE };
+enum	shape { SPHERE, CONE, CYLINDER, PLANE };
 
 typedef struct		s_vector
 {
