@@ -24,7 +24,7 @@
 	"Objects":
 	{
 		"shape": "sphere"
-		"origin": [ -3, 1, 50 ]
+		"origin": [ -3, -2, 50 ]
 		"direction": [ 0, 0, 0 ]
 		"scale": 4.0
 		"material": 
