@@ -53,7 +53,7 @@ void	initialize_environment(t_env *env)
 int		main(int argc, char **argv)
 {
 	t_env env;
-	
+
 	if (argc == 8)
 	{
 		parse_arguments(&env, argv);
