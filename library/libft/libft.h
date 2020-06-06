@@ -17,15 +17,6 @@
 # include <string.h>
 # include <inttypes.h>
 
-# define ABS_VAL(X) (((X) > 0) ? (X) : (-(X)))
-
-# define MIN_VAL(A, B) (((A) < (B)) ? (A) : (B))
-# define MAX_VAL(A, B) (((A) > (B)) ? (A) : (B))
-
-# define UINT_MAX_VAL	((unsigned)(~0L))
-# define INT_MAX_VAL	((int)UINT_MAX_VAL >> 1)
-# define INT_MIN_VAL	((int)(~INT_MAX_VAL))
-
 typedef enum
 {
 	false,
@@ -68,11 +59,11 @@ int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
-int 			ft_isspace(int c);
+int				ft_isspace(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
-int 			ft_pow(int base, int exponent);
+int				ft_pow(int base, int exponent);
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
 char			*ft_strnew(size_t size);
@@ -106,7 +97,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int				ft_islower(int c);
 int				ft_isupper(int c);
-int 			ft_hasdigit(char *str);
+int				ft_hasdigit(char *str);
 int				get_next_line(const int fd, char **line);
 
 #endif
