@@ -25,6 +25,13 @@ int     handle_no_event(t_env *env)
     return 0;
 }
 
+int     press_keyboard(int keycode)
+{
+    if (keycode == KEYBOARD_ESC)
+        exit(0);
+    return 0;
+}
+
 void	handle_events(t_env *env)
 {
 	mlx_hook(env->window.address, EVENT_KEY_PRESS, EVENT_MASK_KEY_PRESS, \
