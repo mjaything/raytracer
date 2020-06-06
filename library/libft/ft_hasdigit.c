@@ -12,16 +12,16 @@
 
 #include "libft.h"
 
-int ft_hasdigit(char *str)
+int	ft_hasdigit(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (ft_isdigit(str[i]))
-            return 1;
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }
