@@ -12,35 +12,35 @@
 
 #include "rtv1.h"
 
-void    find_surface_normal(t_env *env, t_object *object)
+void	find_surface_normal(t_env *env, t_object *object)
 {
-    t_vector    surface_normal;
+	t_vector	surface_normal;
 
-    if (object->shape == SPHERE)
-    {
-        surface_normal = subtract_vector(object->origin, env->ray.hit);
-        object->surface_normal = normalize_vector(surface_normal);
-    }
-    else if (object->shape == CONE || object->shape == CYLINDER)
-    {
-        surface_normal = subtract_vector(object->origin, env->ray.hit);
-        surface_normal.y = 0.0;
-        object->surface_normal = normalize_vector(surface_normal);
-    }
-    else if (object->shape == PLANE)
-    {
-        surface_normal = subtract_vector(object->origin, object->direction);
-        object->surface_normal = normalize_vector(surface_normal);
-    }
+	if (object->shape == SPHERE)
+	{
+		surface_normal = subtract_vector(object->origin, env->ray.hit);
+		object->surface_normal = normalize_vector(surface_normal);
+	}
+	else if (object->shape == CONE || object->shape == CYLINDER)
+	{
+		surface_normal = subtract_vector(object->origin, env->ray.hit);
+		surface_normal.y = 0.0;
+		object->surface_normal = normalize_vector(surface_normal);
+	}
+	else if (object->shape == PLANE)
+	{
+		surface_normal = subtract_vector(object->origin, object->direction);
+		object->surface_normal = normalize_vector(surface_normal);
+	}
 }
 
-void    find_shadows(t_env *env, t_object *object, \
-                    double *nonnegative_min_intersection, double *intersection)
+void	find_shadows(t_env *env, t_object *object, \
+					double *nonnegative_min_intersection, double *intersection)
 {
-    env->shadow = 1.0;
-    *nonnegative_min_intersection = INFINITY;
-    if (ray_object_intersection(env, \
-                                nonnegative_min_intersection, intersection) \
-        != object)
-        env->shadow = 0.5;
+	env->shadow = 1.0;
+	*nonnegative_min_intersection = INFINITY;
+	if (ray_object_intersection(env, \
+								nonnegative_min_intersection, intersection) \
+		!= object)
+		env->shadow = 0.5;
 }

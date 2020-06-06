@@ -12,24 +12,24 @@
 
 #include "rtv1.h"
 
-t_vector    create_vector(double x, double y, double z)
+t_vector	create_vector(double x, double y, double z)
 {
-    t_vector vector;
+	t_vector	vector;
 
-    vector.x = x;
-    vector.y = y;
-    vector.z = z;
-    return vector;
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	return vector;
 }
 
-t_vector     add_vector(t_vector vector1, t_vector vector2)
+t_vector	add_vector(t_vector vector1, t_vector vector2)
 {
-    t_vector added_vector;
+	t_vector	added_vector;
 
-    added_vector.x = vector1.x + vector2.x;
-    added_vector.y = vector1.y + vector2.y;
-    added_vector.z = vector1.z + vector2.z;
-    return added_vector;
+	added_vector.x = vector1.x + vector2.x;
+	added_vector.y = vector1.y + vector2.y;
+	added_vector.z = vector1.z + vector2.z;
+	return added_vector;
 }
 
 t_vector     subtract_vector(t_vector vector1, t_vector vector2)

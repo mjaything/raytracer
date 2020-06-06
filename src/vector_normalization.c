@@ -12,23 +12,23 @@
 
 #include "rtv1.h"
 
-double      calculate_magnitude(t_vector vector)
+double		calculate_magnitude(t_vector vector)
 {
-    double magnitude;
+	double magnitude;
 
-    magnitude = sqrt(vector.x * vector.x + vector.y * vector.y + \
-                vector.z * vector.z);
-    return magnitude;
+	magnitude = sqrt(vector.x * vector.x + vector.y * vector.y + \
+					vector.z * vector.z);
+	return magnitude;
 }
 
-t_vector    normalize_vector(t_vector vector)
+t_vector	normalize_vector(t_vector vector)
 {
-    t_vector    normalized_vector;
-    double      magnitude;
+	t_vector	normalized_vector;
+	double		magnitude;
 
-    magnitude = calculate_magnitude(vector);
-    normalized_vector.x = vector.x / magnitude;
-    normalized_vector.y = vector.y / magnitude;
-    normalized_vector.z = vector.z / magnitude; 
-    return normalized_vector;
+	magnitude = calculate_magnitude(vector);
+	normalized_vector.x = vector.x / magnitude;
+	normalized_vector.y = vector.y / magnitude;
+	normalized_vector.z = vector.z / magnitude; 
+	return normalized_vector;
 }

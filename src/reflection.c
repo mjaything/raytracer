@@ -12,53 +12,53 @@
 
 #include "rtv1.h"
 
-t_vector    reflect_vector_at_surface_normal(t_vector input_vector, \
-                                                t_vector surface_normal)
+t_vector	reflect_vector_at_surface_normal(t_vector input_vector, \
+												t_vector surface_normal)
 {
-    t_vector    reflection_vector;
+	t_vector	reflection_vector;
 
-    reflection_vector = add_vector(input_vector, \
-                        multiply_vector_by_scalar(surface_normal, \
-                        -2.0 * dot_product(input_vector, surface_normal)));
-    return reflection_vector;
+	reflection_vector = add_vector(input_vector, \
+						multiply_vector_by_scalar(surface_normal, \
+						-2.0 * dot_product(input_vector, surface_normal)));
+	return reflection_vector;
 }
 
-t_vector    calculate_diffuse_contribution(t_env *env, t_object *object, \
-                                            t_light *light)
+t_vector	calculate_diffuse_contribution(t_env *env, t_object *object, \
+											t_light *light)
 {
-    double      light_surface_normal_angle_cosine;
-    t_vector    diffuse_contribution;
+	double		light_surface_normal_angle_cosine;
+	t_vector	diffuse_contribution;
 
-    light_surface_normal_angle_cosine = \
-        dot_product(env->ray.direction, object->surface_normal);
-    if (light_surface_normal_angle_cosine < 0.0)
-        light_surface_normal_angle_cosine = 0.0;
-    diffuse_contribution = multiply_vector_by_scalar(light->color, \
-                                        object->material.reflection_diffuse * \
-                                        light_surface_normal_angle_cosine);
-    return diffuse_contribution;
+	light_surface_normal_angle_cosine = \
+		dot_product(env->ray.direction, object->surface_normal);
+	if (light_surface_normal_angle_cosine < 0.0)
+		light_surface_normal_angle_cosine = 0.0;
+	diffuse_contribution = multiply_vector_by_scalar(light->color, \
+										object->material.reflection_diffuse * \
+										light_surface_normal_angle_cosine);
+	return diffuse_contribution;
 }
 
-t_vector    calculate_specular_contribution(t_env *env, t_object *object, \
-                                            t_light *light)
+t_vector	calculate_specular_contribution(t_env *env, t_object *object, \
+											t_light *light)
 {
-    t_vector    light_vector;
-    t_vector    eye_vector;
-    t_vector    reflect_vector;
-    t_vector    specular_contribution;
-    double      eye_surface_normal_angle_cosine;
-    float       factor;
+	t_vector	light_vector;
+	t_vector	eye_vector;
+	t_vector	reflect_vector;
+	t_vector	specular_contribution;
+	double		eye_surface_normal_angle_cosine;
+	float		factor;
 
-    light_vector = normalize_vector(subtract_vector(light->origin, \
-                                                    env->ray.hit));
-    eye_vector = normalize_vector(subtract_vector(env->camera.position, \
-                                                    env->ray.hit));
-    reflect_vector = normalize_vector(add_vector(light_vector, eye_vector));
-    eye_surface_normal_angle_cosine = \
-        dot_product(object->surface_normal, reflect_vector);
-    factor = pow(eye_surface_normal_angle_cosine, object->material.shininess);
-    specular_contribution = multiply_vector_by_scalar(light->color, \
-                                        object->material.reflection_specular * \
-                                        factor);
-    return specular_contribution;
+	light_vector = normalize_vector(subtract_vector(light->origin, \
+													env->ray.hit));
+	eye_vector = normalize_vector(subtract_vector(env->camera.position, \
+													env->ray.hit));
+	reflect_vector = normalize_vector(add_vector(light_vector, eye_vector));
+	eye_surface_normal_angle_cosine = \
+		dot_product(object->surface_normal, reflect_vector);
+	factor = pow(eye_surface_normal_angle_cosine, object->material.shininess);
+	specular_contribution = multiply_vector_by_scalar(light->color, \
+										object->material.reflection_specular * \
+										factor);
+	return specular_contribution;
 }
