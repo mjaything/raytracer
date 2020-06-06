@@ -1,32 +1,32 @@
 {
-        "Camera":
-        {
-            "position": [ 0, 0, -4 ]
-        }
-        "Lights":
-        {
-            "origin": [ -10, 10, -15 ]
-            "color": 0xF9C80E
-            "intensity": 1.0
-        }
-        "Lights":
-        {
-            "origin": [ -10, -10, -15 ]
-            "color": 0x6D8741
-            "intensity": 0.5
-        }
-        "Objects":
-        {
-            "shape": "sphere"
-            "origin": [ 0, 0, 0 ]
-            "scale": 1.0
-            "material":
-            {
-                "color": 0xD1CAC4
-                "reflection_ambient": 0.15
-                "reflection_diffuse": 0.995
-                "reflection_specular": 1.0
-                "shininess": 256
-            }
-        }
+	"Camera":
+	{
+		"position": [ 0, 0, -4 ]
+	}
+	"Lights":
+	{
+		"origin": [ -10, 10, -15 ]
+		"color": 0xF9C80E
+		"intensity": 1.0
+	}
+	"Lights":
+	{
+		"origin": [ -10, -10, -15 ]
+		"color": 0x6D8741
+		"intensity": 0.5
+	}
+	"Objects":
+	{
+		"shape": "sphere"
+		"origin": [ 0, 0, 0 ]
+		"scale": 1.0
+		"material":
+		{
+			"color": 0xD1CAC4
+			"reflection_ambient": 0.15
+			"reflection_diffuse": 0.995
+			"reflection_specular": 1.0
+			"shininess": 256
+		}
+	}
 }

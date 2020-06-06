@@ -1,7 +1,8 @@
 {
 	"Camera":
 	{
-		"position": [ -3, 10, 10 ]
+		"position": [ 0, 1, -10 ]
+        "rotation": [ 0, 0, 0 ]
 	}
 	"Lights":
 	{
@@ -23,26 +24,12 @@
 	}
 	"Objects":
 	{
-		"shape": "sphere"
-		"origin": [ -3, 1, 50 ]
-		"direction": [ 0, 0, 0 ]
-		"scale": 4.0
-		"material": 
-		{
-			"color": 0x5DF3F5
-			"reflection_ambient": 0.15
-			"reflection_diffuse": 0.85
-			"reflection_specular": 1.0
-			"shininess": 256
-		}
-	}
-	"Objects":
-	{
-		"shape": "sphere"
-		"origin": [ -0.25, 2.5, 50.4 ]
-		"direction": [ 0, 0, 0 ]
-		"scale": 5.0
-		"material": 
+		"shape": "cone"
+		"origin": [ 0, 2, 0 ]
+		"direction": [ 30, 0, 10 ]
+        "rotation": [ 20, 20, 20 ]
+		"scale": 1.0
+		"material":
 		{
 			"color": 0xDD5BDF
 			"reflection_ambient": 0.15
@@ -63,21 +50,6 @@
 			"reflection_ambient": 0.45
 			"reflection_diffuse": 0.55
 			"reflection_specular": 0.5
-			"shininess": 64
-		}
-	}
-	"Objects":
-	{
-		"shape": "plane"
-		"origin": [ 0, 0, 500 ]
-		"direction": [ 0, 0, 1 ]
-		"scale": 3.0
-		"material": 
-		{
-			"color": 0xD471F1
-			"reflection_ambient": 0.025
-			"reflection_diffuse": 0.975
-			"reflection_specular": 0.57
 			"shininess": 64
 		}
 	}

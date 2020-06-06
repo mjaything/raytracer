@@ -24,7 +24,7 @@ int	ft_atoi(const char *str)
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
 	sign = (str[i] == '-') ? -1 : 1;
-    (str[i] == '-' || str[i] == '+') ? i++ : 0;
+	(str[i] == '-' || str[i] == '+') ? i++ : 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		number = number * 10 + str[i] - '0';
