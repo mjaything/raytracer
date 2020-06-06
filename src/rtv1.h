@@ -36,16 +36,16 @@
 # define EPSILON 1e-9
 # define PI 3.1415926
 
-# define ERROR_USAGE    "ERROR: Usage: ./rtv1 scene_file -x [angle] -y [angle] -z [angle]"
-# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment initialization"
+# define ERROR_USAGE "Usage: ./rtv1 scene -x [angle] -y [angle] -z [angle]"
+# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check env initialization"
 # define ERROR_SCENE_FILE "ERROR: Check the scene file"
-# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing lights"
-# define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing objects"
+# define ERROR_LIGHT_MEMALLOC "ERROR: Check malloc for parsing lights"
+# define ERROR_OBJECT_MEMALLOC "ERROR: Check malloc for parsing objects"
 # define ERROR_MLX_INIT "ERROR: Check the process of initiating mlx"
-# define ERROR_MLX_NEW_IMAGE "ERROR: Check the process of creating new image"
-# define ERROR_MLX_NEW_WINDOW "ERROR: Check the process of creating new window"
+# define ERROR_MLX_NEW_IMAGE "ERROR: Check new image creation"
+# define ERROR_MLX_NEW_WINDOW "ERROR: Check new window creation"
 
-enum	shape { SPHERE, CONE, CYLINDER, PLANE };
+enum	{ SPHERE, CONE, CYLINDER, PLANE };
 
 typedef struct		s_vector
 {
