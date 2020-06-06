@@ -28,21 +28,24 @@
 # define EVENT_KEY_PRESS 2
 # define EVENT_MASK_KEY_PRESS 1L << 0
 
-# define WINDOW_WIDTH 1024
-# define WINDOW_HEIGHT 768
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 900
 
 # define POSITION_MAXIMUM 1000.0
 # define POSITION_MINIMUM -1000.0
 
 # define EPSILON 1e-9
-# define PI 3.1415926535
+# define PI 3.1415926
 
-# define ERROR_USAGE    "ERROR: Usage: ./rtv1 scene_file -x [angle] -y [angle] \
-                        -z [angle]"
-# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment initialization"
+# define ERROR_USAGE    "ERROR: Usage: ./rtv1 scene_file -x [angle] \
+                        -y [angle] -z [angle]"
+# define ERROR_ENVIRONMENT_INITIALIZATION "ERROR: Check environment \
+                                            initialization"
 # define ERROR_SCENE_FILE "ERROR: Check the scene file"
-# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing lights"
-# define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing objects"
+# define ERROR_LIGHT_MEMALLOC "ERROR: Check the memory allocation for parsing \
+                                lights"
+# define ERROR_OBJECT_MEMALLOC "ERROR: Check the memory allocation for parsing \
+                                objects"
 # define ERROR_MLX_INIT "ERROR: Check the process of initiating mlx"
 # define ERROR_MLX_NEW_IMAGE "ERROR: Check the process of creating new image"
 # define ERROR_MLX_NEW_WINDOW "ERROR: Check the process of creating new window"
@@ -87,10 +90,10 @@ typedef struct      s_light
     t_vector        origin;
     t_vector        color;
     double          intensity;
+    double          attenuation;
+    double          quadratic;
     double          constant;
     double          linear;
-    double          quadratic;
-    double          attenuation;
     struct s_light  *next;
 }                   t_light;
 
@@ -136,7 +139,6 @@ typedef struct      s_camera
     double      field_of_view;
     double      half_view;
     double      anti_aliasing;
-    double      recursion_threshold;
 }                   t_camera;
 
 typedef struct      s_env
@@ -153,7 +155,6 @@ typedef struct      s_env
     t_vector        color_final;
     double          (*intersections[6])(struct s_env *, t_object *);
     void            *mlx_ptr;
-    int             trace_recursion_depth;
     double          shadow;
     double          i;
     double          j;
