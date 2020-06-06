@@ -28,7 +28,7 @@ void	trace_color(t_env *env, t_object *object, \
 			*nonnegative_min_intersection + light->quadratic * \
 			(*nonnegative_min_intersection * *nonnegative_min_intersection));
 		env->color_intersection = add_vector(multiply_vector_by_scalar(\
-							light->color, object->material.reflection_ambient), \
+						light->color, object->material.reflection_ambient), \
 			add_vector(calculate_diffuse_contribution(env, object, light), \
 			calculate_specular_contribution(env, object, light)));
 		env->color_intersection = multiply_vector_by_scalar(\
