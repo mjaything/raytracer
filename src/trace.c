@@ -27,12 +27,12 @@ void	trace_color(t_env *env, t_object *object, \
 		light->attenuation = 1.0 / (light->constant + light->linear * \
 			*nonnegative_min_intersection + light->quadratic * \
 			(*nonnegative_min_intersection * *nonnegative_min_intersection));
-		env->color_intersection = add_vector(multiply_vector_by_scalar\
-			(light->color, object->material.reflection_ambient), \
+		env->color_intersection = add_vector(multiply_vector_by_scalar(\
+							light->color, object->material.reflection_ambient), \
 			add_vector(calculate_diffuse_contribution(env, object, light), \
 			calculate_specular_contribution(env, object, light)));
-		env->color_intersection = multiply_vector_by_scalar\
-								(env->color_intersection, light->attenuation);
+		env->color_intersection = multiply_vector_by_scalar(\
+								env->color_intersection, light->attenuation);
 		env->color_intersection = \
 			multiply_vector_by_scalar(env->color_intersection, env->shadow);
 		env->color_intersection = hadamard_product(env->color_intersection, \
@@ -71,7 +71,7 @@ void	initialize_trace(t_env *env)
 {
 	t_vector	vector1;
 	t_vector	vector2;
-    
+
 	env->ray.origin = env->camera.position;
 	env->ray.direction = env->camera.origin;
 	env->ray.hit = create_vector(0.0, 0.0, 0.0);
@@ -108,5 +108,5 @@ void	trace(t_env *env)
 			env->ray.x++;
 		}
 		env->ray.y++;
-    }
+	}
 }

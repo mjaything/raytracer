@@ -19,7 +19,7 @@ t_vector	parse_array(char *line)
 	int			i;
 	int			j;
 
-	vector = create_vector(0.0 , 0.0, 0.0);
+	vector = create_vector(0.0, 0.0, 0.0);
 	array_split = ft_strsplit(line, ' ');
 	i = 0;
 	j = 0;

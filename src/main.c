@@ -13,7 +13,7 @@
 #include "rtv1.h"
 
 void	parse_arguments(t_env *env, char **argv)
-{   
+{
 	env->arguments.scene = ft_strdup(argv[1]);
 	if (!(ft_strcmp(argv[2], "-x")) && !(ft_strcmp(argv[4], "-y")) && \
 		!(ft_strcmp(argv[6], "-z")))
@@ -52,10 +52,10 @@ void	initialize_environment(t_env *env)
 
 int		main(int argc, char **argv)
 {
+	t_env env;
+	
 	if (argc == 8)
 	{
-		t_env env;
-
 		parse_arguments(&env, argv);
 		initialize_environment(&env);
 		parse_scene(&env);
