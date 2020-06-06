@@ -57,7 +57,7 @@ typedef struct		s_vector
 typedef struct		s_arguments
 {
 	char			*scene;
-	double 			rotation_angle_x;
+	double			rotation_angle_x;
 	double			rotation_angle_y;
 	double			rotation_angle_z;
 }					t_arguments;
@@ -89,7 +89,7 @@ typedef struct		s_light
 	double			quadratic;
 	double			constant;
 	double			linear;
-	struct s_light  *next;
+	struct s_light	*next;
 }					t_light;
 
 typedef struct		s_object
@@ -114,10 +114,10 @@ typedef struct		s_image
 
 typedef struct		s_window
 {
-	void    		*address;
+	void			*address;
 	int				width;
-    int				height;
-    int				dwidth;
+	int				height;
+	int				dwidth;
 	int				dheight;
 }					t_window;
 
