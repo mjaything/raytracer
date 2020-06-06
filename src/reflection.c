@@ -20,7 +20,7 @@ t_vector	reflect_vector_at_surface_normal(t_vector input_vector, \
 	reflection_vector = add_vector(input_vector, \
 						multiply_vector_by_scalar(surface_normal, \
 						-2.0 * dot_product(input_vector, surface_normal)));
-	return reflection_vector;
+	return (reflection_vector);
 }
 
 t_vector	calculate_diffuse_contribution(t_env *env, t_object *object, \
@@ -36,7 +36,7 @@ t_vector	calculate_diffuse_contribution(t_env *env, t_object *object, \
 	diffuse_contribution = multiply_vector_by_scalar(light->color, \
 										object->material.reflection_diffuse * \
 										light_surface_normal_angle_cosine);
-	return diffuse_contribution;
+	return (diffuse_contribution);
 }
 
 t_vector	calculate_specular_contribution(t_env *env, t_object *object, \
@@ -60,5 +60,5 @@ t_vector	calculate_specular_contribution(t_env *env, t_object *object, \
 	specular_contribution = multiply_vector_by_scalar(light->color, \
 										object->material.reflection_specular * \
 										factor);
-	return specular_contribution;
+	return (specular_contribution);
 }

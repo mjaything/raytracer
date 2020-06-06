@@ -18,7 +18,7 @@ double		calculate_magnitude(t_vector vector)
 
 	magnitude = sqrt(vector.x * vector.x + vector.y * vector.y + \
 					vector.z * vector.z);
-	return magnitude;
+	return (magnitude);
 }
 
 t_vector	normalize_vector(t_vector vector)
@@ -30,5 +30,5 @@ t_vector	normalize_vector(t_vector vector)
 	normalized_vector.x = vector.x / magnitude;
 	normalized_vector.y = vector.y / magnitude;
 	normalized_vector.z = vector.z / magnitude; 
-	return normalized_vector;
+	return (normalized_vector);
 }

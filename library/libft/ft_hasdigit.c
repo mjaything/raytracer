@@ -23,5 +23,5 @@ int ft_hasdigit(char *str)
             return 1;
         i++;
     }
-    return 0;
+    return (0);
 }

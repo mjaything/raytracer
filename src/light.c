@@ -46,7 +46,7 @@ t_light		*parse_light(int fd)
 	}
 	ft_strdel(&line);
 	light->next = NULL;
-	return light;
+	return (light);
 }
 
 void		configure_light_source(t_env *env, t_light *light)

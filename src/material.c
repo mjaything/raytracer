@@ -42,5 +42,5 @@ t_material	parse_material(int fd)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	return material;
+	return (material);
 }

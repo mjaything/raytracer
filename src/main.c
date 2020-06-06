@@ -65,5 +65,5 @@ int		main(int argc, char **argv)
 	}
 	else
 		terminate(ERROR_USAGE);
-	return 0;
+	return (0);
 }

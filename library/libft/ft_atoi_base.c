@@ -39,5 +39,5 @@ int			ft_atoi_base(char *str, int str_base)
 			number = (number * str_base) + (ft_tolower(str[i]) - '0');
 		i++;
 	}
-	return sign * number;
+	return (sign * number);
 }

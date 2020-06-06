@@ -17,13 +17,13 @@ double	degree_to_radian(double degrees)
 	double	radian;
 
 	radian = degrees * (PI / 180);
-	return radian;
+	return (radian);
 }
 
 double	calculate_discriminant(double a, double b, double c)
 {
 	double	discriminant;
-    
+
 	discriminant = b * b - 4 * a * c;
-	return discriminant;
+	return (discriminant);
 }

@@ -19,7 +19,7 @@ t_vector	decompose_color(int color_hex)
 	color_rgb.x = (color_hex >> 16) % 256 / 255.0;
 	color_rgb.y = (color_hex >> 8) % 256 / 255.0;
 	color_rgb.z = (color_hex >> 0) % 256 / 255.0;
-	return color_rgb;
+	return (color_rgb);
 }
 
 t_vector	parse_color(char *line)
@@ -29,5 +29,5 @@ t_vector	parse_color(char *line)
 
 	color_hex = ft_atoi_base(line, 16);
 	color_rgb = decompose_color(color_hex);
-	return color_rgb;
+	return (color_rgb);
 }

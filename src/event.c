@@ -16,20 +16,20 @@ int		handle_expose_event(t_env *env)
 {
 	mlx_put_image_to_window(env->mlx_ptr, env->window.address, \
 							env->image.address, 0, 0);
-	return 0;
+	return (0);
 }
 
 int		handle_no_event(t_env *env)
 {
 	handle_expose_event(env);
-	return 0;
+	return (0);
 }
 
 int		press_keyboard(int keycode)
 {
 	if (keycode == KEYBOARD_ESC)
 		exit(0);
-	return 0;
+	return (0);
 }
 
 void	handle_events(t_env *env)

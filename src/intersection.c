@@ -26,7 +26,7 @@ double		ray_sphere_intersection(t_env *env, t_object *object)
 	c = dot_product(sphere_to_ray_vector, sphere_to_ray_vector) - object->scale;
 	discriminant = calculate_discriminant(a, b, c);
 	if (discriminant < EPSILON)
-		return -1.0;
+		return (-1.0);
 	else
 		return ((-b - sqrt(discriminant)) / (2 * a));
 }
@@ -51,7 +51,7 @@ double		ray_cone_intersection(t_env *env, t_object *object)
 		cone_to_ray_vector.z * cone_to_ray_vector.z;
 	discriminant = calculate_discriminant(a, b, c);
 	if (discriminant < EPSILON)
-		return -1.0;
+		return (-1.0);
 	else
 		return ((-b - sqrt(discriminant)) / (2 * a));
 }
@@ -74,7 +74,7 @@ double		ray_cylinder_intersection(t_env *env, t_object *object)
 		object->scale;
 	discriminant = calculate_discriminant(a, b, c);
 	if (discriminant < EPSILON)
-		return -1.0;
+		return (-1.0);
 	else
 		return ((-b - sqrt(discriminant)) / (2 * a));
 }
@@ -91,9 +91,9 @@ double		ray_plane_intersection(t_env *env, t_object *object)
 	c = dot_product(object->direction, env->ray.direction);
 	intersection = -((a - b)) / c;
 	if (intersection < EPSILON)
-		return -1.0;
+		return (-1.0);
 	else
-		return intersection;
+		return (intersection);
 }
 
 t_object	*ray_object_intersection(t_env *env, \
@@ -113,5 +113,5 @@ t_object	*ray_object_intersection(t_env *env, \
 			*nonnegative_min_intersection = *intersection;
 		}
 	}
-	return intersected_object;
+	return (intersected_object);
 }

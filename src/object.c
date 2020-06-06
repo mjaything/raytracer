@@ -39,7 +39,7 @@ t_vector	parse_array(char *line)
 	ft_strdel(&array_split[i]);
 	free(array_split);
 	clamp_vector(&vector, POSITION_MINIMUM, POSITION_MAXIMUM);
-	return vector;
+	return (vector);
 }
 
 double		parse_float(char *line)
@@ -49,7 +49,7 @@ double		parse_float(char *line)
 
 	finder = ft_strstr(line, ":") + 1;
 	number = ft_atof(finder);
-	return number;
+	return (number);
 }
 
 int			parse_shape(char *line)
@@ -65,7 +65,7 @@ int			parse_shape(char *line)
 		shape = CYLINDER;
 	else if (ft_strstr(line, "plane") != NULL)
 		shape = PLANE;
-	return shape;
+	return (shape);
 }
 
 void		initialize_object(t_object *object)
@@ -100,5 +100,5 @@ t_object	*parse_object(int fd)
 	}
 	ft_strdel(&line);
 	object->next = NULL;
-	return object;
+	return (object);
 }
