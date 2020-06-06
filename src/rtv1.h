@@ -54,35 +54,35 @@ enum Shape { SPHERE, CONE, CYLINDER, PLANE };
 
 typedef struct		s_vector
 {
-	double	x;
-	double	y;
-	double	z;
+	double			x;
+	double			y;
+	double			z;
 }					t_vector;
 
 typedef struct		s_arguments
 {
-	char	*scene;
-	double 	rotation_angle_x;
-	double	rotation_angle_y;
-	double	rotation_angle_z;
+	char			*scene;
+	double 			rotation_angle_x;
+	double			rotation_angle_y;
+	double			rotation_angle_z;
 }					t_arguments;
 
 typedef struct		s_material
 {
-	t_vector	surface_color;
-	double		reflection_ambient;
-	double		reflection_diffuse;
-	double		reflection_specular;
-	double		shininess;
+	t_vector		surface_color;
+	double			reflection_ambient;
+	double			reflection_diffuse;
+	double			reflection_specular;
+	double			shininess;
 }					t_material;
 
 typedef struct		s_ray
 {
-	t_vector	origin;
-	t_vector	direction;
-	t_vector	hit;
-	int			x;
-	int			y;
+	t_vector		origin;
+	t_vector		direction;
+	t_vector		hit;
+	int				x;
+	int				y;
 }					t_ray;
 
 typedef struct		s_light
