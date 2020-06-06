@@ -12,17 +12,17 @@
 
 #include "libft.h"
 
-int ft_pow(int base, int exponent)
+int	ft_pow(int base, int exponent)
 {
-    int number;
+	int number;
 
-    number = 1;
-    if (exponent == 0)
-        return 1;
-    while (exponent > 0)
-    {
-        number *= base;
-        exponent--;
-    }
-    return number;
+	number = 1;
+	if (exponent == 0)
+		return (1);
+	while (exponent > 0)
+	{
+		number *= base;
+		exponent--;
+	}
+	return (number);
 }
