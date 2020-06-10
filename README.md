@@ -1,4 +1,4 @@
-# 42-rtv1
+# Ray Tracer
 
 [miniLibX Linux](https://github.com/42Paris/minilibx-linux)
 
