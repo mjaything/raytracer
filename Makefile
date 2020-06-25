@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = rtv1
+NAME = raytracer
 
 CC = gcc
 FLAGS = -Wall -Werror -Wextra -O3

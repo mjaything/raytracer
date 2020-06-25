@@ -1,50 +1,35 @@
 {
 	"Camera":
 	{
-		"position": [ -3, 10, 10 ]
+		"position": [ -18, 13, 11 ]
 	}
 	"Lights":
 	{
-		"origin": [ 16, 10, 11 ]
-		"color": 0xF9C80E
+		"origin": [ 16, 10, 30 ]
+		"color": 0xFFFFFF
+		"intensity": 0.2
+	}
+	"Lights":
+	{
+		"origin": [ -50, -65, 40 ]
+		"color": 0xFFFFFF
 		"intensity": 1.0
 	}
 	"Lights":
 	{
-		"origin": [ -16, 20, 51 ]
-		"color": 0xEA3546
-		"intensity": 1.0
-	}
-	"Lights":
-	{
-		"origin": [ 16, 20, 101 ]
-		"color": 0xFDF91F
-		"intensity": 0.5
+		"origin": [ 80, 350, 100 ]
+		"color": 0xFFFFFF
+		"intensity": 0.2
 	}
 	"Objects":
 	{
 		"shape": "sphere"
-		"origin": [ -3, -2, 50 ]
+		"origin": [ -6, 4, 55 ]
 		"direction": [ 0, 0, 0 ]
-		"scale": 4.0
+		"scale": 8.0
 		"material": 
 		{
-			"color": 0x5DF3F5
-			"reflection_ambient": 0.15
-			"reflection_diffuse": 0.85
-			"reflection_specular": 1.0
-			"shininess": 256
-		}
-	}
-	"Objects":
-	{
-		"shape": "sphere"
-		"origin": [ -0.25, 2.5, 50.4 ]
-		"direction": [ 0, 0, 0 ]
-		"scale": 5.0
-		"material": 
-		{
-			"color": 0xDD5BDF
+			"color": 0xFFFFFF
 			"reflection_ambient": 0.15
 			"reflection_diffuse": 0.85
 			"reflection_specular": 1.0
@@ -59,7 +44,7 @@
 		"scale": 3.0
 		"material":
 		{
-			"color": 0x8866DD
+			"color": 0xCE767C
 			"reflection_ambient": 0.45
 			"reflection_diffuse": 0.55
 			"reflection_specular": 0.5
@@ -74,7 +59,7 @@
 		"scale": 3.0
 		"material": 
 		{
-			"color": 0xD471F1
+			"color": 0xB4D9E9
 			"reflection_ambient": 0.025
 			"reflection_diffuse": 0.975
 			"reflection_specular": 0.57
@@ -86,10 +71,10 @@
 		"shape": "cone"
 		"origin": [ -17, 8, 85 ]
 		"direction": [ 5, 2, 0 ]
-		"scale": 3.0
+		"scale": 2.0
 		"material":
 		{
-			"color": 0xF1F72F
+			"color": 0xFF77B9
 			"reflection_ambient": 0.05
 			"reflection_diffuse": 0.95
 			"reflection_specular": 0.95
@@ -99,12 +84,12 @@
 	"Objects":
 	{
 		"shape": "cylinder"
-		"origin": [ 10, 10, 76 ]
+		"origin": [ -35, 10, 76 ]
 		"direction": [ 10, 0, 30 ]
-		"scale": 1.5
+		"scale": 3.0
 		"material": 
 		{
-			"color": 0x63536F
+			"color": 0xA68D81
 			"reflection_ambient": 0.15
 			"reflection_diffuse": 0.85
 			"reflection_specular": 0.85
