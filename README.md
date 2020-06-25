@@ -1,5 +1,5 @@
 # Ray Tracer
-This project implements a raytracing, which is one of the approaches to rendering 3D computer-generated images. This raytracer could generate four geometric elements—sphere, cone, cylinder, and plane— with supported features including shadows and anti-aliasing(supersampling).
+This project implements a raytracing, which is one of the approaches to rendering 3D computer-generated images. This raytracer could generate four geometric elements —sphere, cone, cylinder, and plane— with supported features including shadows and anti-aliasing(supersampling).
 
 <img src="image/multi-object-scene.png" width="50%">
 
