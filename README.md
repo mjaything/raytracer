@@ -23,7 +23,7 @@ cd raytracer
 make
 ```
 
-4. Run the executable with a scene file, and specify camera angles on x, y, z axes. Scene files are located in the [scenes directory](https://github.com/mjaything/raytracer/tree/master/scenes).
+4. Run the executable with a scene file, and specified camera angles on x, y, z axes. Scene files are located in the [scenes directory](https://github.com/mjaything/raytracer/tree/master/scenes).
 ```
 ./raytracer SCENE_FILE -x [angle(degree)] -y [angle(degree)] -z [angle(degree)]
 ```
